@@ -13,6 +13,7 @@ export class AccessTokenGuard extends AuthGuard('jwt') implements CanActivate {
          context.getClass(),
       ]);
       if(isPublic) return true;
+      
       return super.canActivate(context);
    }
 }

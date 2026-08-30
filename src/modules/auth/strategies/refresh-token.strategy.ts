@@ -16,10 +16,11 @@ export class RefreshTokenStrategy extends PassportStrategy(Strategy, 'jwt-refres
 
    validate(req: Request, payload: { sub: string; email: string; role: string }) {
       const authHeader = req.headers.authorization;
-      if (!authHeader || !authHeader.startsWith('Bearer ')) {
-         throw new UnauthorizedException('Invalid token');
-      }
-      const token = authHeader.split(' ')[1];
+      if (!authHeader) throw new UnauthorizedException('Token is required');
+
+      const token = authHeader.startsWith('Bearer ') 
+      ? authHeader.slice(7).trim() 
+      : authHeader.trim();
       return { ...payload, refreshToken: token };
    }
 }
