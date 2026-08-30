@@ -19,6 +19,12 @@ This skill exists because the project owner alternates between vibe-coding (in A
 
 Everything below (structure, naming, checklist) applies in both modes — it governs what "correct" looks like, not who types it.
 
+## Resolve decisions before generating any guide or code
+
+Before writing a step-by-step guide, file content, or any code — in either mode — first identify every open design decision that would change that content (ORM choice, hashing library, guard strategy, field names, etc.) and list them as short questions. Stop there and wait for answers.
+
+Do not proceed to write concrete guidance "for now" using an assumed default, then ask the questions afterward or alongside it. Writing implementation content before decisions are confirmed means throwing away and redoing that content the moment an answer differs from the assumption — this is the single biggest source of wasted output. The only exception is a decision with one obviously-correct answer and no real trade-off (e.g. file naming that follows the convention below); genuine choices (ORM, auth strategy, schema shape) always wait for the user's answer first.
+
 ## Core principle (applies to Agent-writes Mode)
 
 Write in small, verified increments. Never produce a large multi-file change without pausing to explain what each piece does and why. One logical unit of work (one endpoint, one screen, one migration) at a time, followed by a quick self-check against the checklist below, before moving to the next.
