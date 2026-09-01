@@ -9,6 +9,7 @@ import { APP_GUARD } from '@nestjs/core';
 import { AccessTokenGuard } from '#/modules/auth/guards/access-token.guard.js';
 import { RolesGuard } from './modules/auth/guards/roles.guard.js';
 import { UserModule } from './modules/user/user.module.js';
+import { CategoryModule } from './modules/category/category.module.js';
 
 export const { ObserveModule, ObserveInstrument } = createObserveModule();
 
@@ -31,6 +32,7 @@ export const { ObserveModule, ObserveInstrument } = createObserveModule();
     AuthModule,
     PrismaModule,
     UserModule,
+    CategoryModule
   ],
   controllers: [AppController],
   providers: [AppService,

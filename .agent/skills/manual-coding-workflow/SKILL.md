@@ -21,15 +21,17 @@ Everything below (structure, naming, checklist) applies in both modes — it gov
 
 ## Resolve decisions before generating any guide or code
 
-Before writing a step-by-step guide, file content, or any code — in either mode — first identify every open design decision that would change that content (ORM choice, hashing library, guard strategy, field names, etc.) and list them as short questions. Stop there and wait for answers.
+Before writing a step-by-step guide, file content, or any code — in either mode — inspect only the SRS, task, and existing code relevant to the requested work. Identify only decisions that are unspecified, material or difficult to reverse, and blocking the current task. Ask at most three short questions. Stop there and wait for answers.
 
 Do not proceed to write concrete guidance "for now" using an assumed default, then ask the questions afterward or alongside it. Writing implementation content before decisions are confirmed means throwing away and redoing that content the moment an answer differs from the assumption — this is the single biggest source of wasted output. The only exception is a decision with one obviously-correct answer and no real trade-off (e.g. file naming that follows the convention below); genuine choices (ORM, auth strategy, schema shape) always wait for the user's answer first.
 
+Do not create a separate guide unless the user explicitly requests one. Do not audit, fix, or list issues from earlier or unrelated tasks unless the user explicitly asks for a review or an issue directly blocks the current task. In the latter case, report it in one sentence and wait for direction.
+
 ## Core principle (applies to Agent-writes Mode)
 
-Write in small, verified increments. Never produce a large multi-file change without pausing to explain what each piece does and why. One logical unit of work (one endpoint, one screen, one migration) at a time, followed by a quick self-check against the checklist below, before moving to the next.
+Write in small, verified increments. One logical unit of work (one endpoint, one screen, one migration) at a time, followed by a quick self-check against the checklist below, before moving to the next. Give only a one- or two-sentence status update between units; do not narrate routine implementation details.
 
-If asked to "just build the whole feature," still work file-by-file internally and narrate the sequence — don't dump everything unexplained in one block.
+If asked to "just build the whole feature," still work file-by-file internally. Do not create a separate plan or guide unless requested.
 
 ## Project structure conventions
 
@@ -102,7 +104,7 @@ Never let these silently drift — call it out explicitly when one changes.
 
 ## Pre-commit / pre-"done" checklist
 
-Before considering a piece of work finished, walk through this out loud with the user:
+Before considering a piece of work finished, check the following internally. Report only failures, relevant caveats, or a one-line confirmation:
 - [ ] No hardcoded secrets, API keys, or connection strings (use `.env` / config service)
 - [ ] No leftover `console.log`, `print()`, or debug statements
 - [ ] New DTOs have validation decorators (`class-validator`) matching the actual constraints

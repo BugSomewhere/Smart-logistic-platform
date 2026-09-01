@@ -50,6 +50,10 @@ export class UserService {
     return this.prisma.user.update({
       where: { id: userId },
       data: { password_hash: newPasswordHash },
+      omit: {
+        password_hash:true,
+        refresh_token:true
+      }
     })
   }
 }
