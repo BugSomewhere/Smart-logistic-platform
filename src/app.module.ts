@@ -11,6 +11,8 @@ import { RolesGuard } from './modules/auth/guards/roles.guard.js';
 import { UserModule } from './modules/user/user.module.js';
 import { CategoryModule } from './modules/category/category.module.js';
 import { ProductModule } from './modules/product/product.module.js';
+import { WarehouseModule } from './modules/warehouse/warehouse.module.js';
+import { OrderModule } from './modules/order/order.module.js';
 
 export const { ObserveModule, ObserveInstrument } = createObserveModule();
 
@@ -34,7 +36,9 @@ export const { ObserveModule, ObserveInstrument } = createObserveModule();
     PrismaModule,
     UserModule,
     CategoryModule,
-    ProductModule
+    ProductModule,
+    WarehouseModule,
+    OrderModule
   ],
   controllers: [AppController],
   providers: [AppService,

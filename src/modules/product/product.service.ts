@@ -2,7 +2,7 @@ import { BadRequestException, Injectable } from '@nestjs/common';
 import { CreateProductDto } from './dto/create-product.dto.js';
 import { PrismaService } from '#/modules/prisma/prisma.service.js';
 import { QueryProductDto } from './dto/query-product-dto.js';
-import { Decimal } from '@prisma/client/runtime/wasm-compiler-edge';
+import { Prisma } from '#/generated/prisma/client.js';
 import { UpdateProductDto } from './dto/update-product-dto.js';
 
 @Injectable()
@@ -25,7 +25,7 @@ export class ProductService {
     return this.prisma.product.create({
       data: {
         ...dto,
-        price: new Decimal(dto.price)
+        price: new Prisma.Decimal(dto.price)
       }
     })
   }

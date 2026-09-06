@@ -2,7 +2,6 @@ import { NestFactory } from '@nestjs/core';
 import { AppModule, ObserveInstrument } from '#/app.module.js';
 import { Logger, ValidationPipe } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
-import { AuthModule } from './modules/auth/auth.module.js';
 
 async function bootstrap() {
 

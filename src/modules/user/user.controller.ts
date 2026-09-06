@@ -5,7 +5,6 @@ import { UpdateProfileDto } from './dto/update-profile.dto.js';
 import { ChangePasswordDto } from './dto/change-password.dto.js';
 import { Roles } from '#/common/decorators/roles.decorator.js';
 import { Role } from '#/common/enums/role.enum.js';
-import { Public } from '#/common/decorators/public.decorator.js';
 import { AccessTokenGuard } from '../auth/guards/access-token.guard.js';
 import { RolesGuard } from '../auth/guards/roles.guard.js';
 

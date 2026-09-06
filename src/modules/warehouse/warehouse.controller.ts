@@ -1,9 +1,12 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Query } from '@nestjs/common';
 import { WarehouseService } from './warehouse.service.js';
 import { CreateWarehouseDto } from './dto/create-warehouse.dto.js';
 import { UpdateWarehouseDto } from './dto/update-warehouse.dto.js';
 import { Roles } from '#/common/decorators/roles.decorator.js';
 import { Role } from '#/common/enums/role.enum.js';
+import { CreateStockMovementDto } from './dto/create-stock-movement.dto.js';
+import { Public } from '#/common/decorators/public.decorator.js';
+import { QueryStockHistoryDto } from './dto/query-stock-history.dto.js';
 
 
 @Controller('warehouse')
@@ -16,11 +19,31 @@ export class WarehouseController {
     return this.warehouseService.create(createWarehouseDto);
   }
 
+  @Public()
   @Get()
   findAll() {
     return this.warehouseService.findAll();
   }
 
+  @Roles(Role.ADMIN, Role.WAREHOUSE_MANAGER)
+  @Post('stock-movement')
+  createStockMovement(@Body() dto: CreateStockMovementDto){
+    return this.warehouseService.createStockMovement(dto)
+  }
+
+  @Roles(Role.ADMIN, Role.WAREHOUSE_MANAGER)
+  @Get('stock-movement')
+  getStockHistory(@Query() query: QueryStockHistoryDto){
+    return this.warehouseService.getStockHistory(query)
+  }
+
+  @Roles(Role.ADMIN, Role.WAREHOUSE_MANAGER)
+  @Get('low-stock-alerts')
+  getLowStockAlerts(){
+    return this.warehouseService.getLowStockAlerts()
+  }
+
+  @Public()
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.warehouseService.findOne(id);

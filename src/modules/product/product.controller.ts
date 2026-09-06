@@ -5,6 +5,7 @@ import { UpdateProductDto } from './dto/update-product-dto.js';
 import { Roles } from '#/common/decorators/roles.decorator.js';
 import { Role } from '#/common/enums/role.enum.js';
 import { QueryProductDto } from './dto/query-product-dto.js';
+import { Public } from '#/common/decorators/public.decorator.js';
 
 @Controller('product')
 export class ProductController {
@@ -16,11 +17,13 @@ export class ProductController {
     return this.productService.create(dto)
   }
 
+  @Public()
   @Get()
   findAll(@Query() query: QueryProductDto){
     return this.productService.findAll(query)
   }
 
+  @Public()
   @Get(':id')
   findOne(@Param('id') id: string){
     return this.productService.findOne(id)

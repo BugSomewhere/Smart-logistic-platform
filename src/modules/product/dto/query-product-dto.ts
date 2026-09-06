@@ -1,12 +1,9 @@
-import { IsOptional, IsString } from "class-validator";
+import { IsOptional, IsString, IsUUID } from "class-validator";
 
 export class QueryProductDto {
    @IsOptional() @IsString()
    search?: string;
-   @IsOptional() @IsString()
-   category?: string;
-
-
-   @IsOptional() @IsString()
+   
+   @IsOptional() @IsUUID()
    category_id?: string;
 }
