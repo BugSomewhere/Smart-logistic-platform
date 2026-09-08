@@ -199,6 +199,8 @@ export type UserWhereInput = {
   refresh_token?: Prisma.StringNullableFilter<"User"> | string | null
   created_at?: Prisma.DateTimeFilter<"User"> | Date | string
   orders?: Prisma.OrderListRelationFilter
+  driver?: Prisma.XOR<Prisma.DriverNullableScalarRelationFilter, Prisma.DriverWhereInput> | null
+  route_stops?: Prisma.RouteStopListRelationFilter
 }
 
 export type UserOrderByWithRelationInput = {
@@ -210,6 +212,8 @@ export type UserOrderByWithRelationInput = {
   refresh_token?: Prisma.SortOrderInput | Prisma.SortOrder
   created_at?: Prisma.SortOrder
   orders?: Prisma.OrderOrderByRelationAggregateInput
+  driver?: Prisma.DriverOrderByWithRelationInput
+  route_stops?: Prisma.RouteStopOrderByRelationAggregateInput
 }
 
 export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -224,6 +228,8 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   refresh_token?: Prisma.StringNullableFilter<"User"> | string | null
   created_at?: Prisma.DateTimeFilter<"User"> | Date | string
   orders?: Prisma.OrderListRelationFilter
+  driver?: Prisma.XOR<Prisma.DriverNullableScalarRelationFilter, Prisma.DriverWhereInput> | null
+  route_stops?: Prisma.RouteStopListRelationFilter
 }, "id" | "email">
 
 export type UserOrderByWithAggregationInput = {
@@ -261,6 +267,8 @@ export type UserCreateInput = {
   refresh_token?: string | null
   created_at?: Date | string
   orders?: Prisma.OrderCreateNestedManyWithoutCreatorInput
+  driver?: Prisma.DriverCreateNestedOneWithoutUserInput
+  route_stops?: Prisma.RouteStopCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateInput = {
@@ -272,6 +280,8 @@ export type UserUncheckedCreateInput = {
   refresh_token?: string | null
   created_at?: Date | string
   orders?: Prisma.OrderUncheckedCreateNestedManyWithoutCreatorInput
+  driver?: Prisma.DriverUncheckedCreateNestedOneWithoutUserInput
+  route_stops?: Prisma.RouteStopUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserUpdateInput = {
@@ -283,6 +293,8 @@ export type UserUpdateInput = {
   refresh_token?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   orders?: Prisma.OrderUpdateManyWithoutCreatorNestedInput
+  driver?: Prisma.DriverUpdateOneWithoutUserNestedInput
+  route_stops?: Prisma.RouteStopUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateInput = {
@@ -294,6 +306,8 @@ export type UserUncheckedUpdateInput = {
   refresh_token?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   orders?: Prisma.OrderUncheckedUpdateManyWithoutCreatorNestedInput
+  driver?: Prisma.DriverUncheckedUpdateOneWithoutUserNestedInput
+  route_stops?: Prisma.RouteStopUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateManyInput = {
@@ -361,6 +375,11 @@ export type UserScalarRelationFilter = {
   isNot?: Prisma.UserWhereInput
 }
 
+export type UserNullableScalarRelationFilter = {
+  is?: Prisma.UserWhereInput | null
+  isNot?: Prisma.UserWhereInput | null
+}
+
 export type StringFieldUpdateOperationsInput = {
   set?: string
 }
@@ -391,6 +410,36 @@ export type UserUpdateOneRequiredWithoutOrdersNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutOrdersInput, Prisma.UserUpdateWithoutOrdersInput>, Prisma.UserUncheckedUpdateWithoutOrdersInput>
 }
 
+export type UserCreateNestedOneWithoutDriverInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutDriverInput, Prisma.UserUncheckedCreateWithoutDriverInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutDriverInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutDriverNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutDriverInput, Prisma.UserUncheckedCreateWithoutDriverInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutDriverInput
+  upsert?: Prisma.UserUpsertWithoutDriverInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutDriverInput, Prisma.UserUpdateWithoutDriverInput>, Prisma.UserUncheckedUpdateWithoutDriverInput>
+}
+
+export type UserCreateNestedOneWithoutRoute_stopsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutRoute_stopsInput, Prisma.UserUncheckedCreateWithoutRoute_stopsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutRoute_stopsInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneWithoutRoute_stopsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutRoute_stopsInput, Prisma.UserUncheckedCreateWithoutRoute_stopsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutRoute_stopsInput
+  upsert?: Prisma.UserUpsertWithoutRoute_stopsInput
+  disconnect?: Prisma.UserWhereInput | boolean
+  delete?: Prisma.UserWhereInput | boolean
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutRoute_stopsInput, Prisma.UserUpdateWithoutRoute_stopsInput>, Prisma.UserUncheckedUpdateWithoutRoute_stopsInput>
+}
+
 export type UserCreateWithoutOrdersInput = {
   id?: string
   email: string
@@ -399,6 +448,8 @@ export type UserCreateWithoutOrdersInput = {
   role?: $Enums.Role
   refresh_token?: string | null
   created_at?: Date | string
+  driver?: Prisma.DriverCreateNestedOneWithoutUserInput
+  route_stops?: Prisma.RouteStopCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutOrdersInput = {
@@ -409,6 +460,8 @@ export type UserUncheckedCreateWithoutOrdersInput = {
   role?: $Enums.Role
   refresh_token?: string | null
   created_at?: Date | string
+  driver?: Prisma.DriverUncheckedCreateNestedOneWithoutUserInput
+  route_stops?: Prisma.RouteStopUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutOrdersInput = {
@@ -435,6 +488,8 @@ export type UserUpdateWithoutOrdersInput = {
   role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   refresh_token?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  driver?: Prisma.DriverUpdateOneWithoutUserNestedInput
+  route_stops?: Prisma.RouteStopUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutOrdersInput = {
@@ -445,6 +500,136 @@ export type UserUncheckedUpdateWithoutOrdersInput = {
   role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   refresh_token?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  driver?: Prisma.DriverUncheckedUpdateOneWithoutUserNestedInput
+  route_stops?: Prisma.RouteStopUncheckedUpdateManyWithoutUserNestedInput
+}
+
+export type UserCreateWithoutDriverInput = {
+  id?: string
+  email: string
+  password_hash: string
+  full_name: string
+  role?: $Enums.Role
+  refresh_token?: string | null
+  created_at?: Date | string
+  orders?: Prisma.OrderCreateNestedManyWithoutCreatorInput
+  route_stops?: Prisma.RouteStopCreateNestedManyWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutDriverInput = {
+  id?: string
+  email: string
+  password_hash: string
+  full_name: string
+  role?: $Enums.Role
+  refresh_token?: string | null
+  created_at?: Date | string
+  orders?: Prisma.OrderUncheckedCreateNestedManyWithoutCreatorInput
+  route_stops?: Prisma.RouteStopUncheckedCreateNestedManyWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutDriverInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutDriverInput, Prisma.UserUncheckedCreateWithoutDriverInput>
+}
+
+export type UserUpsertWithoutDriverInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutDriverInput, Prisma.UserUncheckedUpdateWithoutDriverInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutDriverInput, Prisma.UserUncheckedCreateWithoutDriverInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutDriverInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutDriverInput, Prisma.UserUncheckedUpdateWithoutDriverInput>
+}
+
+export type UserUpdateWithoutDriverInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password_hash?: Prisma.StringFieldUpdateOperationsInput | string
+  full_name?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  refresh_token?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  orders?: Prisma.OrderUpdateManyWithoutCreatorNestedInput
+  route_stops?: Prisma.RouteStopUpdateManyWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutDriverInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password_hash?: Prisma.StringFieldUpdateOperationsInput | string
+  full_name?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  refresh_token?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  orders?: Prisma.OrderUncheckedUpdateManyWithoutCreatorNestedInput
+  route_stops?: Prisma.RouteStopUncheckedUpdateManyWithoutUserNestedInput
+}
+
+export type UserCreateWithoutRoute_stopsInput = {
+  id?: string
+  email: string
+  password_hash: string
+  full_name: string
+  role?: $Enums.Role
+  refresh_token?: string | null
+  created_at?: Date | string
+  orders?: Prisma.OrderCreateNestedManyWithoutCreatorInput
+  driver?: Prisma.DriverCreateNestedOneWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutRoute_stopsInput = {
+  id?: string
+  email: string
+  password_hash: string
+  full_name: string
+  role?: $Enums.Role
+  refresh_token?: string | null
+  created_at?: Date | string
+  orders?: Prisma.OrderUncheckedCreateNestedManyWithoutCreatorInput
+  driver?: Prisma.DriverUncheckedCreateNestedOneWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutRoute_stopsInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutRoute_stopsInput, Prisma.UserUncheckedCreateWithoutRoute_stopsInput>
+}
+
+export type UserUpsertWithoutRoute_stopsInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutRoute_stopsInput, Prisma.UserUncheckedUpdateWithoutRoute_stopsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutRoute_stopsInput, Prisma.UserUncheckedCreateWithoutRoute_stopsInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutRoute_stopsInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutRoute_stopsInput, Prisma.UserUncheckedUpdateWithoutRoute_stopsInput>
+}
+
+export type UserUpdateWithoutRoute_stopsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password_hash?: Prisma.StringFieldUpdateOperationsInput | string
+  full_name?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  refresh_token?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  orders?: Prisma.OrderUpdateManyWithoutCreatorNestedInput
+  driver?: Prisma.DriverUpdateOneWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutRoute_stopsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password_hash?: Prisma.StringFieldUpdateOperationsInput | string
+  full_name?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  refresh_token?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  orders?: Prisma.OrderUncheckedUpdateManyWithoutCreatorNestedInput
+  driver?: Prisma.DriverUncheckedUpdateOneWithoutUserNestedInput
 }
 
 
@@ -454,10 +639,12 @@ export type UserUncheckedUpdateWithoutOrdersInput = {
 
 export type UserCountOutputType = {
   orders: number
+  route_stops: number
 }
 
 export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   orders?: boolean | UserCountOutputTypeCountOrdersArgs
+  route_stops?: boolean | UserCountOutputTypeCountRoute_stopsArgs
 }
 
 /**
@@ -477,6 +664,13 @@ export type UserCountOutputTypeCountOrdersArgs<ExtArgs extends runtime.Types.Ext
   where?: Prisma.OrderWhereInput
 }
 
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountRoute_stopsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.RouteStopWhereInput
+}
+
 
 export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -487,6 +681,8 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   refresh_token?: boolean
   created_at?: boolean
   orders?: boolean | Prisma.User$ordersArgs<ExtArgs>
+  driver?: boolean | Prisma.User$driverArgs<ExtArgs>
+  route_stops?: boolean | Prisma.User$route_stopsArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["user"]>
 
@@ -523,6 +719,8 @@ export type UserSelectScalar = {
 export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "email" | "password_hash" | "full_name" | "role" | "refresh_token" | "created_at", ExtArgs["result"]["user"]>
 export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   orders?: boolean | Prisma.User$ordersArgs<ExtArgs>
+  driver?: boolean | Prisma.User$driverArgs<ExtArgs>
+  route_stops?: boolean | Prisma.User$route_stopsArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type UserIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -532,6 +730,8 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   name: "User"
   objects: {
     orders: Prisma.$OrderPayload<ExtArgs>[]
+    driver: Prisma.$DriverPayload<ExtArgs> | null
+    route_stops: Prisma.$RouteStopPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -936,6 +1136,8 @@ readonly fields: UserFieldRefs;
 export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
   orders<T extends Prisma.User$ordersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$ordersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$OrderPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  driver<T extends Prisma.User$driverArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$driverArgs<ExtArgs>>): Prisma.Prisma__DriverClient<runtime.Types.Result.GetResult<Prisma.$DriverPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  route_stops<T extends Prisma.User$route_stopsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$route_stopsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$RouteStopPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1386,6 +1588,49 @@ export type User$ordersArgs<ExtArgs extends runtime.Types.Extensions.InternalArg
   take?: number
   skip?: number
   distinct?: Prisma.OrderScalarFieldEnum | Prisma.OrderScalarFieldEnum[]
+}
+
+/**
+ * User.driver
+ */
+export type User$driverArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Driver
+   */
+  select?: Prisma.DriverSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Driver
+   */
+  omit?: Prisma.DriverOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.DriverInclude<ExtArgs> | null
+  where?: Prisma.DriverWhereInput
+}
+
+/**
+ * User.route_stops
+ */
+export type User$route_stopsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the RouteStop
+   */
+  select?: Prisma.RouteStopSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the RouteStop
+   */
+  omit?: Prisma.RouteStopOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.RouteStopInclude<ExtArgs> | null
+  where?: Prisma.RouteStopWhereInput
+  orderBy?: Prisma.RouteStopOrderByWithRelationInput | Prisma.RouteStopOrderByWithRelationInput[]
+  cursor?: Prisma.RouteStopWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.RouteStopScalarFieldEnum | Prisma.RouteStopScalarFieldEnum[]
 }
 
 /**

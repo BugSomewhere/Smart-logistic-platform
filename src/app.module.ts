@@ -13,6 +13,7 @@ import { CategoryModule } from './modules/category/category.module.js';
 import { ProductModule } from './modules/product/product.module.js';
 import { WarehouseModule } from './modules/warehouse/warehouse.module.js';
 import { OrderModule } from './modules/order/order.module.js';
+import { RouteModule } from './modules/route/route.module.js';
 
 export const { ObserveModule, ObserveInstrument } = createObserveModule();
 
@@ -38,11 +39,12 @@ export const { ObserveModule, ObserveInstrument } = createObserveModule();
     CategoryModule,
     ProductModule,
     WarehouseModule,
-    OrderModule
+    OrderModule,
+    RouteModule
   ],
   controllers: [AppController],
-  providers: [AppService,
-    { provide: APP_GUARD, useClass: AccessTokenGuard },
-    { provide: APP_GUARD, useClass: RolesGuard },],
+  providers: [AppService]
+    // { provide: APP_GUARD, useClass: AccessTokenGuard },
+    // { provide: APP_GUARD, useClass: RolesGuard },
 })
 export class AppModule { }

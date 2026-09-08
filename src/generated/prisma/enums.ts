@@ -37,3 +37,31 @@ export const OrderStatus = {
 } as const
 
 export type OrderStatus = (typeof OrderStatus)[keyof typeof OrderStatus]
+
+
+export const DriverStatus = {
+  available: 'available',
+  on_route: 'on_route',
+  off_duty: 'off_duty'
+} as const
+
+export type DriverStatus = (typeof DriverStatus)[keyof typeof DriverStatus]
+
+
+export const RouteStatus = {
+  planned: 'planned',
+  in_progress: 'in_progress',
+  completed: 'completed'
+} as const
+
+export type RouteStatus = (typeof RouteStatus)[keyof typeof RouteStatus]
+
+
+export const RouteStopStatus = {
+  pending: 'pending',
+  arrived: 'arrived',
+  completed: 'completed',
+  failed: 'failed'
+} as const
+
+export type RouteStopStatus = (typeof RouteStopStatus)[keyof typeof RouteStopStatus]

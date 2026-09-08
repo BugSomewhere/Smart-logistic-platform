@@ -62,3 +62,23 @@ export type OrderItem = Prisma.OrderItemModel
  * 
  */
 export type DeliveryPoint = Prisma.DeliveryPointModel
+/**
+ * Model Driver
+ * 
+ */
+export type Driver = Prisma.DriverModel
+/**
+ * Model Vehicle
+ * 
+ */
+export type Vehicle = Prisma.VehicleModel
+/**
+ * Model Route
+ * 
+ */
+export type Route = Prisma.RouteModel
+/**
+ * Model RouteStop
+ * 
+ */
+export type RouteStop = Prisma.RouteStopModel

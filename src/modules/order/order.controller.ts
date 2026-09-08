@@ -5,6 +5,10 @@ import { CreateOrderDto } from './dto/create-order.dto.js';
 import { Roles } from '#/common/decorators/roles.decorator.js';
 import { Role } from '#/common/enums/role.enum.js';
 import { OrderStatus } from '#/generated/prisma/enums.js';
+import { CurrentUser } from '#/common/decorators/current-user.decorator.js';
+import * as client from '#/generated/prisma/client.js';
+import { AuthGuard } from '@nestjs/passport';
+
 
 @Controller('order')
 export class OrderController {
@@ -19,7 +23,7 @@ export class OrderController {
   @Roles(Role.ADMIN, Role.DISPATCHER)
   @Patch(':id/status')
   async updateStatus(@Param('id') id: string, @Body() dto: { status: OrderStatus }) {
-    
+    return this.orderService.updateStatus(id, dto);
   }
 
   @Get(':id')
@@ -29,7 +33,7 @@ export class OrderController {
 
   @Roles(Role.ADMIN, Role.DISPATCHER)
   @Post()
-  async create(userId: string, @Body() dto: CreateOrderDto) {
+  async create(@CurrentUser('userId') userId: string, @Body() dto: CreateOrderDto) {
     return this.orderService.create(userId, dto);
   }
 }

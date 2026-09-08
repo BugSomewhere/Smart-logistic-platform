@@ -59,7 +59,11 @@ export const ModelName = {
   StockMovement: 'StockMovement',
   Order: 'Order',
   OrderItem: 'OrderItem',
-  DeliveryPoint: 'DeliveryPoint'
+  DeliveryPoint: 'DeliveryPoint',
+  Driver: 'Driver',
+  Vehicle: 'Vehicle',
+  Route: 'Route',
+  RouteStop: 'RouteStop'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -185,6 +189,53 @@ export const DeliveryPointScalarFieldEnum = {
 } as const
 
 export type DeliveryPointScalarFieldEnum = (typeof DeliveryPointScalarFieldEnum)[keyof typeof DeliveryPointScalarFieldEnum]
+
+
+export const DriverScalarFieldEnum = {
+  id: 'id',
+  user_id: 'user_id',
+  phone: 'phone',
+  status: 'status'
+} as const
+
+export type DriverScalarFieldEnum = (typeof DriverScalarFieldEnum)[keyof typeof DriverScalarFieldEnum]
+
+
+export const VehicleScalarFieldEnum = {
+  id: 'id',
+  plate_number: 'plate_number',
+  capacity: 'capacity',
+  type: 'type'
+} as const
+
+export type VehicleScalarFieldEnum = (typeof VehicleScalarFieldEnum)[keyof typeof VehicleScalarFieldEnum]
+
+
+export const RouteScalarFieldEnum = {
+  id: 'id',
+  route_date: 'route_date',
+  driver_id: 'driver_id',
+  vehicle_id: 'vehicle_id',
+  status: 'status',
+  total_distance_km: 'total_distance_km',
+  total_duration_min: 'total_duration_min',
+  created_at: 'created_at'
+} as const
+
+export type RouteScalarFieldEnum = (typeof RouteScalarFieldEnum)[keyof typeof RouteScalarFieldEnum]
+
+
+export const RouteStopScalarFieldEnum = {
+  id: 'id',
+  route_id: 'route_id',
+  delivery_point_id: 'delivery_point_id',
+  sequence: 'sequence',
+  eta: 'eta',
+  status: 'status',
+  userId: 'userId'
+} as const
+
+export type RouteStopScalarFieldEnum = (typeof RouteStopScalarFieldEnum)[keyof typeof RouteStopScalarFieldEnum]
 
 
 export const SortOrder = {

@@ -237,6 +237,7 @@ export type DeliveryPointWhereInput = {
   time_window_start?: Prisma.StringNullableFilter<"DeliveryPoint"> | string | null
   time_window_end?: Prisma.StringNullableFilter<"DeliveryPoint"> | string | null
   order?: Prisma.XOR<Prisma.OrderScalarRelationFilter, Prisma.OrderWhereInput>
+  route_stops?: Prisma.RouteStopListRelationFilter
 }
 
 export type DeliveryPointOrderByWithRelationInput = {
@@ -248,6 +249,7 @@ export type DeliveryPointOrderByWithRelationInput = {
   time_window_start?: Prisma.SortOrderInput | Prisma.SortOrder
   time_window_end?: Prisma.SortOrderInput | Prisma.SortOrder
   order?: Prisma.OrderOrderByWithRelationInput
+  route_stops?: Prisma.RouteStopOrderByRelationAggregateInput
 }
 
 export type DeliveryPointWhereUniqueInput = Prisma.AtLeast<{
@@ -262,6 +264,7 @@ export type DeliveryPointWhereUniqueInput = Prisma.AtLeast<{
   time_window_start?: Prisma.StringNullableFilter<"DeliveryPoint"> | string | null
   time_window_end?: Prisma.StringNullableFilter<"DeliveryPoint"> | string | null
   order?: Prisma.XOR<Prisma.OrderScalarRelationFilter, Prisma.OrderWhereInput>
+  route_stops?: Prisma.RouteStopListRelationFilter
 }, "id">
 
 export type DeliveryPointOrderByWithAggregationInput = {
@@ -300,6 +303,7 @@ export type DeliveryPointCreateInput = {
   time_window_start?: string | null
   time_window_end?: string | null
   order: Prisma.OrderCreateNestedOneWithoutDelivery_pointsInput
+  route_stops?: Prisma.RouteStopCreateNestedManyWithoutDelivery_pointInput
 }
 
 export type DeliveryPointUncheckedCreateInput = {
@@ -310,6 +314,7 @@ export type DeliveryPointUncheckedCreateInput = {
   longitude: runtime.Decimal | runtime.DecimalJsLike | number | string
   time_window_start?: string | null
   time_window_end?: string | null
+  route_stops?: Prisma.RouteStopUncheckedCreateNestedManyWithoutDelivery_pointInput
 }
 
 export type DeliveryPointUpdateInput = {
@@ -320,6 +325,7 @@ export type DeliveryPointUpdateInput = {
   time_window_start?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   time_window_end?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   order?: Prisma.OrderUpdateOneRequiredWithoutDelivery_pointsNestedInput
+  route_stops?: Prisma.RouteStopUpdateManyWithoutDelivery_pointNestedInput
 }
 
 export type DeliveryPointUncheckedUpdateInput = {
@@ -330,6 +336,7 @@ export type DeliveryPointUncheckedUpdateInput = {
   longitude?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   time_window_start?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   time_window_end?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  route_stops?: Prisma.RouteStopUncheckedUpdateManyWithoutDelivery_pointNestedInput
 }
 
 export type DeliveryPointCreateManyInput = {
@@ -411,6 +418,11 @@ export type DeliveryPointSumOrderByAggregateInput = {
   longitude?: Prisma.SortOrder
 }
 
+export type DeliveryPointScalarRelationFilter = {
+  is?: Prisma.DeliveryPointWhereInput
+  isNot?: Prisma.DeliveryPointWhereInput
+}
+
 export type DeliveryPointCreateNestedManyWithoutOrderInput = {
   create?: Prisma.XOR<Prisma.DeliveryPointCreateWithoutOrderInput, Prisma.DeliveryPointUncheckedCreateWithoutOrderInput> | Prisma.DeliveryPointCreateWithoutOrderInput[] | Prisma.DeliveryPointUncheckedCreateWithoutOrderInput[]
   connectOrCreate?: Prisma.DeliveryPointCreateOrConnectWithoutOrderInput | Prisma.DeliveryPointCreateOrConnectWithoutOrderInput[]
@@ -453,6 +465,20 @@ export type DeliveryPointUncheckedUpdateManyWithoutOrderNestedInput = {
   deleteMany?: Prisma.DeliveryPointScalarWhereInput | Prisma.DeliveryPointScalarWhereInput[]
 }
 
+export type DeliveryPointCreateNestedOneWithoutRoute_stopsInput = {
+  create?: Prisma.XOR<Prisma.DeliveryPointCreateWithoutRoute_stopsInput, Prisma.DeliveryPointUncheckedCreateWithoutRoute_stopsInput>
+  connectOrCreate?: Prisma.DeliveryPointCreateOrConnectWithoutRoute_stopsInput
+  connect?: Prisma.DeliveryPointWhereUniqueInput
+}
+
+export type DeliveryPointUpdateOneRequiredWithoutRoute_stopsNestedInput = {
+  create?: Prisma.XOR<Prisma.DeliveryPointCreateWithoutRoute_stopsInput, Prisma.DeliveryPointUncheckedCreateWithoutRoute_stopsInput>
+  connectOrCreate?: Prisma.DeliveryPointCreateOrConnectWithoutRoute_stopsInput
+  upsert?: Prisma.DeliveryPointUpsertWithoutRoute_stopsInput
+  connect?: Prisma.DeliveryPointWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.DeliveryPointUpdateToOneWithWhereWithoutRoute_stopsInput, Prisma.DeliveryPointUpdateWithoutRoute_stopsInput>, Prisma.DeliveryPointUncheckedUpdateWithoutRoute_stopsInput>
+}
+
 export type DeliveryPointCreateWithoutOrderInput = {
   id?: string
   address: string
@@ -460,6 +486,7 @@ export type DeliveryPointCreateWithoutOrderInput = {
   longitude: runtime.Decimal | runtime.DecimalJsLike | number | string
   time_window_start?: string | null
   time_window_end?: string | null
+  route_stops?: Prisma.RouteStopCreateNestedManyWithoutDelivery_pointInput
 }
 
 export type DeliveryPointUncheckedCreateWithoutOrderInput = {
@@ -469,6 +496,7 @@ export type DeliveryPointUncheckedCreateWithoutOrderInput = {
   longitude: runtime.Decimal | runtime.DecimalJsLike | number | string
   time_window_start?: string | null
   time_window_end?: string | null
+  route_stops?: Prisma.RouteStopUncheckedCreateNestedManyWithoutDelivery_pointInput
 }
 
 export type DeliveryPointCreateOrConnectWithoutOrderInput = {
@@ -510,6 +538,62 @@ export type DeliveryPointScalarWhereInput = {
   time_window_end?: Prisma.StringNullableFilter<"DeliveryPoint"> | string | null
 }
 
+export type DeliveryPointCreateWithoutRoute_stopsInput = {
+  id?: string
+  address: string
+  latitude: runtime.Decimal | runtime.DecimalJsLike | number | string
+  longitude: runtime.Decimal | runtime.DecimalJsLike | number | string
+  time_window_start?: string | null
+  time_window_end?: string | null
+  order: Prisma.OrderCreateNestedOneWithoutDelivery_pointsInput
+}
+
+export type DeliveryPointUncheckedCreateWithoutRoute_stopsInput = {
+  id?: string
+  order_id: string
+  address: string
+  latitude: runtime.Decimal | runtime.DecimalJsLike | number | string
+  longitude: runtime.Decimal | runtime.DecimalJsLike | number | string
+  time_window_start?: string | null
+  time_window_end?: string | null
+}
+
+export type DeliveryPointCreateOrConnectWithoutRoute_stopsInput = {
+  where: Prisma.DeliveryPointWhereUniqueInput
+  create: Prisma.XOR<Prisma.DeliveryPointCreateWithoutRoute_stopsInput, Prisma.DeliveryPointUncheckedCreateWithoutRoute_stopsInput>
+}
+
+export type DeliveryPointUpsertWithoutRoute_stopsInput = {
+  update: Prisma.XOR<Prisma.DeliveryPointUpdateWithoutRoute_stopsInput, Prisma.DeliveryPointUncheckedUpdateWithoutRoute_stopsInput>
+  create: Prisma.XOR<Prisma.DeliveryPointCreateWithoutRoute_stopsInput, Prisma.DeliveryPointUncheckedCreateWithoutRoute_stopsInput>
+  where?: Prisma.DeliveryPointWhereInput
+}
+
+export type DeliveryPointUpdateToOneWithWhereWithoutRoute_stopsInput = {
+  where?: Prisma.DeliveryPointWhereInput
+  data: Prisma.XOR<Prisma.DeliveryPointUpdateWithoutRoute_stopsInput, Prisma.DeliveryPointUncheckedUpdateWithoutRoute_stopsInput>
+}
+
+export type DeliveryPointUpdateWithoutRoute_stopsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  address?: Prisma.StringFieldUpdateOperationsInput | string
+  latitude?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  longitude?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  time_window_start?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  time_window_end?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  order?: Prisma.OrderUpdateOneRequiredWithoutDelivery_pointsNestedInput
+}
+
+export type DeliveryPointUncheckedUpdateWithoutRoute_stopsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  order_id?: Prisma.StringFieldUpdateOperationsInput | string
+  address?: Prisma.StringFieldUpdateOperationsInput | string
+  latitude?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  longitude?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  time_window_start?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  time_window_end?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+}
+
 export type DeliveryPointCreateManyOrderInput = {
   id?: string
   address: string
@@ -526,6 +610,7 @@ export type DeliveryPointUpdateWithoutOrderInput = {
   longitude?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   time_window_start?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   time_window_end?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  route_stops?: Prisma.RouteStopUpdateManyWithoutDelivery_pointNestedInput
 }
 
 export type DeliveryPointUncheckedUpdateWithoutOrderInput = {
@@ -535,6 +620,7 @@ export type DeliveryPointUncheckedUpdateWithoutOrderInput = {
   longitude?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   time_window_start?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   time_window_end?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  route_stops?: Prisma.RouteStopUncheckedUpdateManyWithoutDelivery_pointNestedInput
 }
 
 export type DeliveryPointUncheckedUpdateManyWithoutOrderInput = {
@@ -547,6 +633,35 @@ export type DeliveryPointUncheckedUpdateManyWithoutOrderInput = {
 }
 
 
+/**
+ * Count Type DeliveryPointCountOutputType
+ */
+
+export type DeliveryPointCountOutputType = {
+  route_stops: number
+}
+
+export type DeliveryPointCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  route_stops?: boolean | DeliveryPointCountOutputTypeCountRoute_stopsArgs
+}
+
+/**
+ * DeliveryPointCountOutputType without action
+ */
+export type DeliveryPointCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the DeliveryPointCountOutputType
+   */
+  select?: Prisma.DeliveryPointCountOutputTypeSelect<ExtArgs> | null
+}
+
+/**
+ * DeliveryPointCountOutputType without action
+ */
+export type DeliveryPointCountOutputTypeCountRoute_stopsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.RouteStopWhereInput
+}
+
 
 export type DeliveryPointSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -557,6 +672,8 @@ export type DeliveryPointSelect<ExtArgs extends runtime.Types.Extensions.Interna
   time_window_start?: boolean
   time_window_end?: boolean
   order?: boolean | Prisma.OrderDefaultArgs<ExtArgs>
+  route_stops?: boolean | Prisma.DeliveryPoint$route_stopsArgs<ExtArgs>
+  _count?: boolean | Prisma.DeliveryPointCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["deliveryPoint"]>
 
 export type DeliveryPointSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -594,6 +711,8 @@ export type DeliveryPointSelectScalar = {
 export type DeliveryPointOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "order_id" | "address" | "latitude" | "longitude" | "time_window_start" | "time_window_end", ExtArgs["result"]["deliveryPoint"]>
 export type DeliveryPointInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   order?: boolean | Prisma.OrderDefaultArgs<ExtArgs>
+  route_stops?: boolean | Prisma.DeliveryPoint$route_stopsArgs<ExtArgs>
+  _count?: boolean | Prisma.DeliveryPointCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type DeliveryPointIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   order?: boolean | Prisma.OrderDefaultArgs<ExtArgs>
@@ -606,6 +725,7 @@ export type $DeliveryPointPayload<ExtArgs extends runtime.Types.Extensions.Inter
   name: "DeliveryPoint"
   objects: {
     order: Prisma.$OrderPayload<ExtArgs>
+    route_stops: Prisma.$RouteStopPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1010,6 +1130,7 @@ readonly fields: DeliveryPointFieldRefs;
 export interface Prisma__DeliveryPointClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
   order<T extends Prisma.OrderDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.OrderDefaultArgs<ExtArgs>>): Prisma.Prisma__OrderClient<runtime.Types.Result.GetResult<Prisma.$OrderPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  route_stops<T extends Prisma.DeliveryPoint$route_stopsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.DeliveryPoint$route_stopsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$RouteStopPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1444,6 +1565,30 @@ export type DeliveryPointDeleteManyArgs<ExtArgs extends runtime.Types.Extensions
    * Limit how many DeliveryPoints to delete.
    */
   limit?: number
+}
+
+/**
+ * DeliveryPoint.route_stops
+ */
+export type DeliveryPoint$route_stopsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the RouteStop
+   */
+  select?: Prisma.RouteStopSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the RouteStop
+   */
+  omit?: Prisma.RouteStopOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.RouteStopInclude<ExtArgs> | null
+  where?: Prisma.RouteStopWhereInput
+  orderBy?: Prisma.RouteStopOrderByWithRelationInput | Prisma.RouteStopOrderByWithRelationInput[]
+  cursor?: Prisma.RouteStopWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.RouteStopScalarFieldEnum | Prisma.RouteStopScalarFieldEnum[]
 }
 
 /**
