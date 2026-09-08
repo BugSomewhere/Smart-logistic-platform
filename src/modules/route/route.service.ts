@@ -4,6 +4,7 @@ import { OptimizeRouteDto } from './dto/optimize-route.dto.js';
 import { AssignRouteDto } from './dto/assign-route.dto.js';
 import { TspPoint, TspSolverService } from './tsp-solver.service.js';
 import { DriverStatus, OrderStatus, RouteStatus } from '#/generated/prisma/enums.js';
+import { ReorderStopsDto } from '../vehicle/dto/reorder-stops.dto.js';
 
 @Injectable()
 export class RouteService {
@@ -157,6 +158,42 @@ export class RouteService {
 
     return this.formatRoute(updatedRoute);
   }
+
+  async reorderStops(routeId: string, dto: ReorderStopsDto) {
+    const route = await this.prisma.route.findUniqueOrThrow({
+      where: { id: routeId },
+      include: { stops: true },
+    });
+
+    if (route.status !== 'planned') {
+      throw new BadRequestException('Can only reorder stops for planned routes');
+    }
+
+    // Verify tất cả stop_ids thuộc route này
+    const existingIds = new Set(route.stops.map(s => s.id));
+    for (const id of dto.stop_ids) {
+      if (!existingIds.has(id)) {
+        throw new BadRequestException(`Stop "${id}" does not belong to this route`);
+      }
+    }
+
+    if (dto.stop_ids.length !== route.stops.length) {
+      throw new BadRequestException('Must include all stops in the new order');
+    }
+
+    // Update sequence cho từng stop
+    await this.prisma.$transaction(
+      dto.stop_ids.map((stopId, index) =>
+        this.prisma.routeStop.update({
+          where: { id: stopId },
+          data: { sequence: index },
+        }),
+      ),
+    );
+
+    return this.findOne(routeId);
+  }
+
 
   // ponytail: format ETA for route stops to DD/MM/YYYY HH:mm
   private formatRoute<T extends { stops?: Array<any> }>(route: T) {

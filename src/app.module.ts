@@ -14,6 +14,8 @@ import { ProductModule } from './modules/product/product.module.js';
 import { WarehouseModule } from './modules/warehouse/warehouse.module.js';
 import { OrderModule } from './modules/order/order.module.js';
 import { RouteModule } from './modules/route/route.module.js';
+import { VehicleModule } from './modules/vehicle/vehicle.module.js';
+import { DriverModule } from './modules/driver/driver.module.js';
 
 export const { ObserveModule, ObserveInstrument } = createObserveModule();
 
@@ -36,6 +38,8 @@ export const { ObserveModule, ObserveInstrument } = createObserveModule();
     AuthModule,
     PrismaModule,
     UserModule,
+    DriverModule,
+    VehicleModule,
     CategoryModule,
     ProductModule,
     WarehouseModule,

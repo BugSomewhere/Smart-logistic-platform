@@ -4,10 +4,12 @@ import { OptimizeRouteDto } from './dto/optimize-route.dto.js';
 import { AssignRouteDto } from './dto/assign-route.dto.js';
 import { Role } from "#/common/enums/role.enum.js"
 import { Roles } from '#/common/decorators/roles.decorator.js';
+import { ReorderStopsDto } from '../vehicle/dto/reorder-stops.dto.js';
+
 
 @Controller('route')
 export class RouteController {
-  constructor(private readonly routeService: RouteService) {}
+  constructor(private readonly routeService: RouteService) { }
 
   @Roles(Role.ADMIN, Role.DISPATCHER)
   @Post('optimize')
@@ -20,6 +22,13 @@ export class RouteController {
   assign(@Param('id') id: string, @Body() dto: AssignRouteDto) {
     return this.routeService.assign(id, dto);
   }
+
+  @Roles(Role.ADMIN, Role.DISPATCHER)
+  @Patch(':id/reorder')
+  reorderStops(@Param('id') id: string, @Body() dto: ReorderStopsDto) {
+    return this.routeService.reorderStops(id, dto);
+  }
+
 
   @Roles(Role.ADMIN, Role.DISPATCHER)
   @Get()
