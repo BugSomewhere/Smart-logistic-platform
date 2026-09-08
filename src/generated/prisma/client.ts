@@ -106,3 +106,8 @@ export type Route = Prisma.RouteModel
  * 
  */
 export type RouteStop = Prisma.RouteStopModel
+/**
+ * Model Forecast
+ * 
+ */
+export type Forecast = Prisma.ForecastModel

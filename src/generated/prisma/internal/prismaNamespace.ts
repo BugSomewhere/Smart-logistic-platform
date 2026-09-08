@@ -409,7 +409,8 @@ export const ModelName = {
   Driver: 'Driver',
   Vehicle: 'Vehicle',
   Route: 'Route',
-  RouteStop: 'RouteStop'
+  RouteStop: 'RouteStop',
+  Forecast: 'Forecast'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -425,7 +426,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "category" | "product" | "warehouse" | "inventory" | "stockMovement" | "order" | "orderItem" | "deliveryPoint" | "driver" | "vehicle" | "route" | "routeStop"
+    modelProps: "user" | "category" | "product" | "warehouse" | "inventory" | "stockMovement" | "order" | "orderItem" | "deliveryPoint" | "driver" | "vehicle" | "route" | "routeStop" | "forecast"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -1391,6 +1392,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    Forecast: {
+      payload: Prisma.$ForecastPayload<ExtArgs>
+      fields: Prisma.ForecastFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.ForecastFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ForecastPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.ForecastFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ForecastPayload>
+        }
+        findFirst: {
+          args: Prisma.ForecastFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ForecastPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.ForecastFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ForecastPayload>
+        }
+        findMany: {
+          args: Prisma.ForecastFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ForecastPayload>[]
+        }
+        create: {
+          args: Prisma.ForecastCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ForecastPayload>
+        }
+        createMany: {
+          args: Prisma.ForecastCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.ForecastCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ForecastPayload>[]
+        }
+        delete: {
+          args: Prisma.ForecastDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ForecastPayload>
+        }
+        update: {
+          args: Prisma.ForecastUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ForecastPayload>
+        }
+        deleteMany: {
+          args: Prisma.ForecastDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.ForecastUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.ForecastUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ForecastPayload>[]
+        }
+        upsert: {
+          args: Prisma.ForecastUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ForecastPayload>
+        }
+        aggregate: {
+          args: Prisma.ForecastAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateForecast>
+        }
+        groupBy: {
+          args: Prisma.ForecastGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ForecastGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.ForecastCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ForecastCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -1584,6 +1659,20 @@ export const RouteStopScalarFieldEnum = {
 } as const
 
 export type RouteStopScalarFieldEnum = (typeof RouteStopScalarFieldEnum)[keyof typeof RouteStopScalarFieldEnum]
+
+
+export const ForecastScalarFieldEnum = {
+  id: 'id',
+  product_id: 'product_id',
+  warehouse_id: 'warehouse_id',
+  forecast_date: 'forecast_date',
+  predicted_quantity: 'predicted_quantity',
+  actual_quantity: 'actual_quantity',
+  model_used: 'model_used',
+  created_at: 'created_at'
+} as const
+
+export type ForecastScalarFieldEnum = (typeof ForecastScalarFieldEnum)[keyof typeof ForecastScalarFieldEnum]
 
 
 export const SortOrder = {
@@ -1933,6 +2022,7 @@ export type GlobalOmitConfig = {
   vehicle?: Prisma.VehicleOmit
   route?: Prisma.RouteOmit
   routeStop?: Prisma.RouteStopOmit
+  forecast?: Prisma.ForecastOmit
 }
 
 /* Types for Logging */

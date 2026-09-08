@@ -63,7 +63,8 @@ export const ModelName = {
   Driver: 'Driver',
   Vehicle: 'Vehicle',
   Route: 'Route',
-  RouteStop: 'RouteStop'
+  RouteStop: 'RouteStop',
+  Forecast: 'Forecast'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -236,6 +237,20 @@ export const RouteStopScalarFieldEnum = {
 } as const
 
 export type RouteStopScalarFieldEnum = (typeof RouteStopScalarFieldEnum)[keyof typeof RouteStopScalarFieldEnum]
+
+
+export const ForecastScalarFieldEnum = {
+  id: 'id',
+  product_id: 'product_id',
+  warehouse_id: 'warehouse_id',
+  forecast_date: 'forecast_date',
+  predicted_quantity: 'predicted_quantity',
+  actual_quantity: 'actual_quantity',
+  model_used: 'model_used',
+  created_at: 'created_at'
+} as const
+
+export type ForecastScalarFieldEnum = (typeof ForecastScalarFieldEnum)[keyof typeof ForecastScalarFieldEnum]
 
 
 export const SortOrder = {

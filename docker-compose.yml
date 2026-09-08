@@ -9,6 +9,14 @@ services:
       POSTGRES_DB: smart_logistics
     volumes:
       - pgdata:/var/lib/postgresql/data
+      
+  ml-service:
+    build:
+      context: ./services/ml-service
+    ports:
+      - "8000:8000"
+    environment:
+      - PYTHONUNBUFFERED=1
 
 volumes:
   pgdata:
