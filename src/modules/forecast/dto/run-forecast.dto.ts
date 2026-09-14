@@ -1,4 +1,4 @@
-import { IsUUID, IsOptional, IsInt, Min } from "class-validator";
+import { IsUUID, IsOptional, IsInt, Min, IsString, IsIn } from "class-validator";
 
 export class RunForecastDto {
   @IsUUID()
@@ -9,4 +9,7 @@ export class RunForecastDto {
 
   @IsOptional() @IsInt() @Min(1)
   periods?: number;          // default 30
+
+  @IsOptional() @IsString() @IsIn(['prophet', 'arima'])
+  model_type?: string  // default prophet
 }

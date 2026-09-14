@@ -45,6 +45,7 @@ export class ForecastService {
         warehouse_id: dto.warehouse_id ?? null,
         history,
         periods: dto.periods ?? 30,
+        model_type: dto.model_type ?? "prophet",
       }),
     })
 
@@ -53,20 +54,42 @@ export class ForecastService {
     }
 
     const result = await response.json();
-    // 4. Lưu predictions vào bảng forecasts
-    const forecasts = await this.prisma.$transaction(
-      result.predictions.map((p: any) =>
-        this.prisma.forecast.create({
-          data: {
-            product_id: dto.product_id,
-            warehouse_id: dto.warehouse_id ?? null,
-            forecast_date: new Date(p.date),
-            predicted_quantity: p.predicted_quantity,
-            model_used: result.model_used,
-          },
-        }),
-      ),
-    );
+
+    if (!result.predictions || result.predictions.length === 0) {
+      return {
+        product_id: dto.product_id,
+        model_used: result.model_used,
+        predictions_count: 0,
+        predictions: [],
+      }
+    }
+    // 4. Lưu predictions vào bảng forecasts (Dùng transaction xoá cũ + tạo mới)
+    const minForecastDate = new Date(result.predictions[0].date)
+    
+    const forecasts = await this.prisma.$transaction(async (tx) => {
+      // Xoá các forecast tương lai cũ của sản phẩm này
+      await tx.forecast.deleteMany({
+        where: {
+          product_id: dto.product_id,
+          warehouse_id: dto.warehouse_id ?? null,
+          forecast_date: { gte: minForecastDate },
+        },
+      });
+      // Tạo các bản ghi dự báo mới
+      return Promise.all(
+        result.predictions.map((p: any) =>
+          tx.forecast.create({
+            data: {
+              product_id: dto.product_id,
+              warehouse_id: dto.warehouse_id ?? null,
+              forecast_date: new Date(p.date),
+              predicted_quantity: p.predicted_quantity,
+              model_used: result.model_used,
+            },
+          }),
+        ),
+      );
+    });
     return {
       product_id: dto.product_id,
       model_used: result.model_used,
