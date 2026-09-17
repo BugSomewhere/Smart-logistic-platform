@@ -176,6 +176,7 @@ export type DriverWhereInput = {
   status?: Prisma.EnumDriverStatusFilter<"Driver"> | $Enums.DriverStatus
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   routes?: Prisma.RouteListRelationFilter
+  locations?: Prisma.DriverLocationListRelationFilter
 }
 
 export type DriverOrderByWithRelationInput = {
@@ -185,6 +186,7 @@ export type DriverOrderByWithRelationInput = {
   status?: Prisma.SortOrder
   user?: Prisma.UserOrderByWithRelationInput
   routes?: Prisma.RouteOrderByRelationAggregateInput
+  locations?: Prisma.DriverLocationOrderByRelationAggregateInput
 }
 
 export type DriverWhereUniqueInput = Prisma.AtLeast<{
@@ -197,6 +199,7 @@ export type DriverWhereUniqueInput = Prisma.AtLeast<{
   status?: Prisma.EnumDriverStatusFilter<"Driver"> | $Enums.DriverStatus
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   routes?: Prisma.RouteListRelationFilter
+  locations?: Prisma.DriverLocationListRelationFilter
 }, "id" | "user_id">
 
 export type DriverOrderByWithAggregationInput = {
@@ -225,6 +228,7 @@ export type DriverCreateInput = {
   status?: $Enums.DriverStatus
   user: Prisma.UserCreateNestedOneWithoutDriverInput
   routes?: Prisma.RouteCreateNestedManyWithoutDriverInput
+  locations?: Prisma.DriverLocationCreateNestedManyWithoutDriverInput
 }
 
 export type DriverUncheckedCreateInput = {
@@ -233,6 +237,7 @@ export type DriverUncheckedCreateInput = {
   phone: string
   status?: $Enums.DriverStatus
   routes?: Prisma.RouteUncheckedCreateNestedManyWithoutDriverInput
+  locations?: Prisma.DriverLocationUncheckedCreateNestedManyWithoutDriverInput
 }
 
 export type DriverUpdateInput = {
@@ -241,6 +246,7 @@ export type DriverUpdateInput = {
   status?: Prisma.EnumDriverStatusFieldUpdateOperationsInput | $Enums.DriverStatus
   user?: Prisma.UserUpdateOneRequiredWithoutDriverNestedInput
   routes?: Prisma.RouteUpdateManyWithoutDriverNestedInput
+  locations?: Prisma.DriverLocationUpdateManyWithoutDriverNestedInput
 }
 
 export type DriverUncheckedUpdateInput = {
@@ -249,6 +255,7 @@ export type DriverUncheckedUpdateInput = {
   phone?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumDriverStatusFieldUpdateOperationsInput | $Enums.DriverStatus
   routes?: Prisma.RouteUncheckedUpdateManyWithoutDriverNestedInput
+  locations?: Prisma.DriverLocationUncheckedUpdateManyWithoutDriverNestedInput
 }
 
 export type DriverCreateManyInput = {
@@ -295,6 +302,11 @@ export type DriverMinOrderByAggregateInput = {
   user_id?: Prisma.SortOrder
   phone?: Prisma.SortOrder
   status?: Prisma.SortOrder
+}
+
+export type DriverScalarRelationFilter = {
+  is?: Prisma.DriverWhereInput
+  isNot?: Prisma.DriverWhereInput
 }
 
 export type DriverCreateNestedOneWithoutUserInput = {
@@ -349,11 +361,26 @@ export type DriverUpdateOneWithoutRoutesNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.DriverUpdateToOneWithWhereWithoutRoutesInput, Prisma.DriverUpdateWithoutRoutesInput>, Prisma.DriverUncheckedUpdateWithoutRoutesInput>
 }
 
+export type DriverCreateNestedOneWithoutLocationsInput = {
+  create?: Prisma.XOR<Prisma.DriverCreateWithoutLocationsInput, Prisma.DriverUncheckedCreateWithoutLocationsInput>
+  connectOrCreate?: Prisma.DriverCreateOrConnectWithoutLocationsInput
+  connect?: Prisma.DriverWhereUniqueInput
+}
+
+export type DriverUpdateOneRequiredWithoutLocationsNestedInput = {
+  create?: Prisma.XOR<Prisma.DriverCreateWithoutLocationsInput, Prisma.DriverUncheckedCreateWithoutLocationsInput>
+  connectOrCreate?: Prisma.DriverCreateOrConnectWithoutLocationsInput
+  upsert?: Prisma.DriverUpsertWithoutLocationsInput
+  connect?: Prisma.DriverWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.DriverUpdateToOneWithWhereWithoutLocationsInput, Prisma.DriverUpdateWithoutLocationsInput>, Prisma.DriverUncheckedUpdateWithoutLocationsInput>
+}
+
 export type DriverCreateWithoutUserInput = {
   id?: string
   phone: string
   status?: $Enums.DriverStatus
   routes?: Prisma.RouteCreateNestedManyWithoutDriverInput
+  locations?: Prisma.DriverLocationCreateNestedManyWithoutDriverInput
 }
 
 export type DriverUncheckedCreateWithoutUserInput = {
@@ -361,6 +388,7 @@ export type DriverUncheckedCreateWithoutUserInput = {
   phone: string
   status?: $Enums.DriverStatus
   routes?: Prisma.RouteUncheckedCreateNestedManyWithoutDriverInput
+  locations?: Prisma.DriverLocationUncheckedCreateNestedManyWithoutDriverInput
 }
 
 export type DriverCreateOrConnectWithoutUserInput = {
@@ -384,6 +412,7 @@ export type DriverUpdateWithoutUserInput = {
   phone?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumDriverStatusFieldUpdateOperationsInput | $Enums.DriverStatus
   routes?: Prisma.RouteUpdateManyWithoutDriverNestedInput
+  locations?: Prisma.DriverLocationUpdateManyWithoutDriverNestedInput
 }
 
 export type DriverUncheckedUpdateWithoutUserInput = {
@@ -391,6 +420,7 @@ export type DriverUncheckedUpdateWithoutUserInput = {
   phone?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumDriverStatusFieldUpdateOperationsInput | $Enums.DriverStatus
   routes?: Prisma.RouteUncheckedUpdateManyWithoutDriverNestedInput
+  locations?: Prisma.DriverLocationUncheckedUpdateManyWithoutDriverNestedInput
 }
 
 export type DriverCreateWithoutRoutesInput = {
@@ -398,6 +428,7 @@ export type DriverCreateWithoutRoutesInput = {
   phone: string
   status?: $Enums.DriverStatus
   user: Prisma.UserCreateNestedOneWithoutDriverInput
+  locations?: Prisma.DriverLocationCreateNestedManyWithoutDriverInput
 }
 
 export type DriverUncheckedCreateWithoutRoutesInput = {
@@ -405,6 +436,7 @@ export type DriverUncheckedCreateWithoutRoutesInput = {
   user_id: string
   phone: string
   status?: $Enums.DriverStatus
+  locations?: Prisma.DriverLocationUncheckedCreateNestedManyWithoutDriverInput
 }
 
 export type DriverCreateOrConnectWithoutRoutesInput = {
@@ -428,6 +460,7 @@ export type DriverUpdateWithoutRoutesInput = {
   phone?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumDriverStatusFieldUpdateOperationsInput | $Enums.DriverStatus
   user?: Prisma.UserUpdateOneRequiredWithoutDriverNestedInput
+  locations?: Prisma.DriverLocationUpdateManyWithoutDriverNestedInput
 }
 
 export type DriverUncheckedUpdateWithoutRoutesInput = {
@@ -435,6 +468,55 @@ export type DriverUncheckedUpdateWithoutRoutesInput = {
   user_id?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumDriverStatusFieldUpdateOperationsInput | $Enums.DriverStatus
+  locations?: Prisma.DriverLocationUncheckedUpdateManyWithoutDriverNestedInput
+}
+
+export type DriverCreateWithoutLocationsInput = {
+  id?: string
+  phone: string
+  status?: $Enums.DriverStatus
+  user: Prisma.UserCreateNestedOneWithoutDriverInput
+  routes?: Prisma.RouteCreateNestedManyWithoutDriverInput
+}
+
+export type DriverUncheckedCreateWithoutLocationsInput = {
+  id?: string
+  user_id: string
+  phone: string
+  status?: $Enums.DriverStatus
+  routes?: Prisma.RouteUncheckedCreateNestedManyWithoutDriverInput
+}
+
+export type DriverCreateOrConnectWithoutLocationsInput = {
+  where: Prisma.DriverWhereUniqueInput
+  create: Prisma.XOR<Prisma.DriverCreateWithoutLocationsInput, Prisma.DriverUncheckedCreateWithoutLocationsInput>
+}
+
+export type DriverUpsertWithoutLocationsInput = {
+  update: Prisma.XOR<Prisma.DriverUpdateWithoutLocationsInput, Prisma.DriverUncheckedUpdateWithoutLocationsInput>
+  create: Prisma.XOR<Prisma.DriverCreateWithoutLocationsInput, Prisma.DriverUncheckedCreateWithoutLocationsInput>
+  where?: Prisma.DriverWhereInput
+}
+
+export type DriverUpdateToOneWithWhereWithoutLocationsInput = {
+  where?: Prisma.DriverWhereInput
+  data: Prisma.XOR<Prisma.DriverUpdateWithoutLocationsInput, Prisma.DriverUncheckedUpdateWithoutLocationsInput>
+}
+
+export type DriverUpdateWithoutLocationsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  phone?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumDriverStatusFieldUpdateOperationsInput | $Enums.DriverStatus
+  user?: Prisma.UserUpdateOneRequiredWithoutDriverNestedInput
+  routes?: Prisma.RouteUpdateManyWithoutDriverNestedInput
+}
+
+export type DriverUncheckedUpdateWithoutLocationsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  user_id?: Prisma.StringFieldUpdateOperationsInput | string
+  phone?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumDriverStatusFieldUpdateOperationsInput | $Enums.DriverStatus
+  routes?: Prisma.RouteUncheckedUpdateManyWithoutDriverNestedInput
 }
 
 
@@ -444,10 +526,12 @@ export type DriverUncheckedUpdateWithoutRoutesInput = {
 
 export type DriverCountOutputType = {
   routes: number
+  locations: number
 }
 
 export type DriverCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   routes?: boolean | DriverCountOutputTypeCountRoutesArgs
+  locations?: boolean | DriverCountOutputTypeCountLocationsArgs
 }
 
 /**
@@ -467,6 +551,13 @@ export type DriverCountOutputTypeCountRoutesArgs<ExtArgs extends runtime.Types.E
   where?: Prisma.RouteWhereInput
 }
 
+/**
+ * DriverCountOutputType without action
+ */
+export type DriverCountOutputTypeCountLocationsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.DriverLocationWhereInput
+}
+
 
 export type DriverSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -475,6 +566,7 @@ export type DriverSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   status?: boolean
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   routes?: boolean | Prisma.Driver$routesArgs<ExtArgs>
+  locations?: boolean | Prisma.Driver$locationsArgs<ExtArgs>
   _count?: boolean | Prisma.DriverCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["driver"]>
 
@@ -505,6 +597,7 @@ export type DriverOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
 export type DriverInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   routes?: boolean | Prisma.Driver$routesArgs<ExtArgs>
+  locations?: boolean | Prisma.Driver$locationsArgs<ExtArgs>
   _count?: boolean | Prisma.DriverCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type DriverIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -519,6 +612,7 @@ export type $DriverPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs
   objects: {
     user: Prisma.$UserPayload<ExtArgs>
     routes: Prisma.$RoutePayload<ExtArgs>[]
+    locations: Prisma.$DriverLocationPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -921,6 +1015,7 @@ export interface Prisma__DriverClient<T, Null = never, ExtArgs extends runtime.T
   readonly [Symbol.toStringTag]: "PrismaPromise"
   user<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   routes<T extends Prisma.Driver$routesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Driver$routesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$RoutePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  locations<T extends Prisma.Driver$locationsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Driver$locationsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$DriverLocationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1376,6 +1471,30 @@ export type Driver$routesArgs<ExtArgs extends runtime.Types.Extensions.InternalA
   take?: number
   skip?: number
   distinct?: Prisma.RouteScalarFieldEnum | Prisma.RouteScalarFieldEnum[]
+}
+
+/**
+ * Driver.locations
+ */
+export type Driver$locationsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the DriverLocation
+   */
+  select?: Prisma.DriverLocationSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the DriverLocation
+   */
+  omit?: Prisma.DriverLocationOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.DriverLocationInclude<ExtArgs> | null
+  where?: Prisma.DriverLocationWhereInput
+  orderBy?: Prisma.DriverLocationOrderByWithRelationInput | Prisma.DriverLocationOrderByWithRelationInput[]
+  cursor?: Prisma.DriverLocationWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.DriverLocationScalarFieldEnum | Prisma.DriverLocationScalarFieldEnum[]
 }
 
 /**

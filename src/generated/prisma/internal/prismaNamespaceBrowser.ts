@@ -64,7 +64,8 @@ export const ModelName = {
   Vehicle: 'Vehicle',
   Route: 'Route',
   RouteStop: 'RouteStop',
-  Forecast: 'Forecast'
+  Forecast: 'Forecast',
+  DriverLocation: 'DriverLocation'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -251,6 +252,18 @@ export const ForecastScalarFieldEnum = {
 } as const
 
 export type ForecastScalarFieldEnum = (typeof ForecastScalarFieldEnum)[keyof typeof ForecastScalarFieldEnum]
+
+
+export const DriverLocationScalarFieldEnum = {
+  id: 'id',
+  driver_id: 'driver_id',
+  route_id: 'route_id',
+  latitude: 'latitude',
+  longitude: 'longitude',
+  recorded_at: 'recorded_at'
+} as const
+
+export type DriverLocationScalarFieldEnum = (typeof DriverLocationScalarFieldEnum)[keyof typeof DriverLocationScalarFieldEnum]
 
 
 export const SortOrder = {

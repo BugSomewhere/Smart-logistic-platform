@@ -87,3 +87,8 @@ export type RouteStop = Prisma.RouteStopModel
  * 
  */
 export type Forecast = Prisma.ForecastModel
+/**
+ * Model DriverLocation
+ * 
+ */
+export type DriverLocation = Prisma.DriverLocationModel

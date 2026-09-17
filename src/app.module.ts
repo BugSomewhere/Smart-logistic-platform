@@ -17,6 +17,7 @@ import { RouteModule } from './modules/route/route.module.js';
 import { VehicleModule } from './modules/vehicle/vehicle.module.js';
 import { DriverModule } from './modules/driver/driver.module.js';
 import { ForecastModule } from './modules/forecast/forecast.module.js';
+import { TrackingModule } from './modules/tracking/tracking.module.js';
 
 export const { ObserveModule, ObserveInstrument } = createObserveModule();
 
@@ -46,7 +47,8 @@ export const { ObserveModule, ObserveInstrument } = createObserveModule();
     WarehouseModule,
     OrderModule,
     RouteModule,
-    ForecastModule
+    ForecastModule,
+    TrackingModule
   ],
   controllers: [AppController],
   providers: [AppService]

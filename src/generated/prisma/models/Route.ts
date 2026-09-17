@@ -247,6 +247,7 @@ export type RouteWhereInput = {
   driver?: Prisma.XOR<Prisma.DriverNullableScalarRelationFilter, Prisma.DriverWhereInput> | null
   vehicle?: Prisma.XOR<Prisma.VehicleNullableScalarRelationFilter, Prisma.VehicleWhereInput> | null
   stops?: Prisma.RouteStopListRelationFilter
+  locations?: Prisma.DriverLocationListRelationFilter
 }
 
 export type RouteOrderByWithRelationInput = {
@@ -261,6 +262,7 @@ export type RouteOrderByWithRelationInput = {
   driver?: Prisma.DriverOrderByWithRelationInput
   vehicle?: Prisma.VehicleOrderByWithRelationInput
   stops?: Prisma.RouteStopOrderByRelationAggregateInput
+  locations?: Prisma.DriverLocationOrderByRelationAggregateInput
 }
 
 export type RouteWhereUniqueInput = Prisma.AtLeast<{
@@ -278,6 +280,7 @@ export type RouteWhereUniqueInput = Prisma.AtLeast<{
   driver?: Prisma.XOR<Prisma.DriverNullableScalarRelationFilter, Prisma.DriverWhereInput> | null
   vehicle?: Prisma.XOR<Prisma.VehicleNullableScalarRelationFilter, Prisma.VehicleWhereInput> | null
   stops?: Prisma.RouteStopListRelationFilter
+  locations?: Prisma.DriverLocationListRelationFilter
 }, "id">
 
 export type RouteOrderByWithAggregationInput = {
@@ -320,6 +323,7 @@ export type RouteCreateInput = {
   driver?: Prisma.DriverCreateNestedOneWithoutRoutesInput
   vehicle?: Prisma.VehicleCreateNestedOneWithoutRoutesInput
   stops?: Prisma.RouteStopCreateNestedManyWithoutRouteInput
+  locations?: Prisma.DriverLocationCreateNestedManyWithoutRouteInput
 }
 
 export type RouteUncheckedCreateInput = {
@@ -332,6 +336,7 @@ export type RouteUncheckedCreateInput = {
   total_duration_min?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   created_at?: Date | string
   stops?: Prisma.RouteStopUncheckedCreateNestedManyWithoutRouteInput
+  locations?: Prisma.DriverLocationUncheckedCreateNestedManyWithoutRouteInput
 }
 
 export type RouteUpdateInput = {
@@ -344,6 +349,7 @@ export type RouteUpdateInput = {
   driver?: Prisma.DriverUpdateOneWithoutRoutesNestedInput
   vehicle?: Prisma.VehicleUpdateOneWithoutRoutesNestedInput
   stops?: Prisma.RouteStopUpdateManyWithoutRouteNestedInput
+  locations?: Prisma.DriverLocationUpdateManyWithoutRouteNestedInput
 }
 
 export type RouteUncheckedUpdateInput = {
@@ -356,6 +362,7 @@ export type RouteUncheckedUpdateInput = {
   total_duration_min?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   stops?: Prisma.RouteStopUncheckedUpdateManyWithoutRouteNestedInput
+  locations?: Prisma.DriverLocationUncheckedUpdateManyWithoutRouteNestedInput
 }
 
 export type RouteCreateManyInput = {
@@ -445,6 +452,11 @@ export type RouteSumOrderByAggregateInput = {
 export type RouteScalarRelationFilter = {
   is?: Prisma.RouteWhereInput
   isNot?: Prisma.RouteWhereInput
+}
+
+export type RouteNullableScalarRelationFilter = {
+  is?: Prisma.RouteWhereInput | null
+  isNot?: Prisma.RouteWhereInput | null
 }
 
 export type RouteCreateNestedManyWithoutDriverInput = {
@@ -557,6 +569,22 @@ export type RouteUpdateOneRequiredWithoutStopsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.RouteUpdateToOneWithWhereWithoutStopsInput, Prisma.RouteUpdateWithoutStopsInput>, Prisma.RouteUncheckedUpdateWithoutStopsInput>
 }
 
+export type RouteCreateNestedOneWithoutLocationsInput = {
+  create?: Prisma.XOR<Prisma.RouteCreateWithoutLocationsInput, Prisma.RouteUncheckedCreateWithoutLocationsInput>
+  connectOrCreate?: Prisma.RouteCreateOrConnectWithoutLocationsInput
+  connect?: Prisma.RouteWhereUniqueInput
+}
+
+export type RouteUpdateOneWithoutLocationsNestedInput = {
+  create?: Prisma.XOR<Prisma.RouteCreateWithoutLocationsInput, Prisma.RouteUncheckedCreateWithoutLocationsInput>
+  connectOrCreate?: Prisma.RouteCreateOrConnectWithoutLocationsInput
+  upsert?: Prisma.RouteUpsertWithoutLocationsInput
+  disconnect?: Prisma.RouteWhereInput | boolean
+  delete?: Prisma.RouteWhereInput | boolean
+  connect?: Prisma.RouteWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.RouteUpdateToOneWithWhereWithoutLocationsInput, Prisma.RouteUpdateWithoutLocationsInput>, Prisma.RouteUncheckedUpdateWithoutLocationsInput>
+}
+
 export type RouteCreateWithoutDriverInput = {
   id?: string
   route_date: Date | string
@@ -566,6 +594,7 @@ export type RouteCreateWithoutDriverInput = {
   created_at?: Date | string
   vehicle?: Prisma.VehicleCreateNestedOneWithoutRoutesInput
   stops?: Prisma.RouteStopCreateNestedManyWithoutRouteInput
+  locations?: Prisma.DriverLocationCreateNestedManyWithoutRouteInput
 }
 
 export type RouteUncheckedCreateWithoutDriverInput = {
@@ -577,6 +606,7 @@ export type RouteUncheckedCreateWithoutDriverInput = {
   total_duration_min?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   created_at?: Date | string
   stops?: Prisma.RouteStopUncheckedCreateNestedManyWithoutRouteInput
+  locations?: Prisma.DriverLocationUncheckedCreateNestedManyWithoutRouteInput
 }
 
 export type RouteCreateOrConnectWithoutDriverInput = {
@@ -628,6 +658,7 @@ export type RouteCreateWithoutVehicleInput = {
   created_at?: Date | string
   driver?: Prisma.DriverCreateNestedOneWithoutRoutesInput
   stops?: Prisma.RouteStopCreateNestedManyWithoutRouteInput
+  locations?: Prisma.DriverLocationCreateNestedManyWithoutRouteInput
 }
 
 export type RouteUncheckedCreateWithoutVehicleInput = {
@@ -639,6 +670,7 @@ export type RouteUncheckedCreateWithoutVehicleInput = {
   total_duration_min?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   created_at?: Date | string
   stops?: Prisma.RouteStopUncheckedCreateNestedManyWithoutRouteInput
+  locations?: Prisma.DriverLocationUncheckedCreateNestedManyWithoutRouteInput
 }
 
 export type RouteCreateOrConnectWithoutVehicleInput = {
@@ -676,6 +708,7 @@ export type RouteCreateWithoutStopsInput = {
   created_at?: Date | string
   driver?: Prisma.DriverCreateNestedOneWithoutRoutesInput
   vehicle?: Prisma.VehicleCreateNestedOneWithoutRoutesInput
+  locations?: Prisma.DriverLocationCreateNestedManyWithoutRouteInput
 }
 
 export type RouteUncheckedCreateWithoutStopsInput = {
@@ -687,6 +720,7 @@ export type RouteUncheckedCreateWithoutStopsInput = {
   total_distance_km?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   total_duration_min?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   created_at?: Date | string
+  locations?: Prisma.DriverLocationUncheckedCreateNestedManyWithoutRouteInput
 }
 
 export type RouteCreateOrConnectWithoutStopsInput = {
@@ -714,6 +748,7 @@ export type RouteUpdateWithoutStopsInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   driver?: Prisma.DriverUpdateOneWithoutRoutesNestedInput
   vehicle?: Prisma.VehicleUpdateOneWithoutRoutesNestedInput
+  locations?: Prisma.DriverLocationUpdateManyWithoutRouteNestedInput
 }
 
 export type RouteUncheckedUpdateWithoutStopsInput = {
@@ -725,6 +760,71 @@ export type RouteUncheckedUpdateWithoutStopsInput = {
   total_distance_km?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   total_duration_min?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  locations?: Prisma.DriverLocationUncheckedUpdateManyWithoutRouteNestedInput
+}
+
+export type RouteCreateWithoutLocationsInput = {
+  id?: string
+  route_date: Date | string
+  status?: $Enums.RouteStatus
+  total_distance_km?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  total_duration_min?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  created_at?: Date | string
+  driver?: Prisma.DriverCreateNestedOneWithoutRoutesInput
+  vehicle?: Prisma.VehicleCreateNestedOneWithoutRoutesInput
+  stops?: Prisma.RouteStopCreateNestedManyWithoutRouteInput
+}
+
+export type RouteUncheckedCreateWithoutLocationsInput = {
+  id?: string
+  route_date: Date | string
+  driver_id?: string | null
+  vehicle_id?: string | null
+  status?: $Enums.RouteStatus
+  total_distance_km?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  total_duration_min?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  created_at?: Date | string
+  stops?: Prisma.RouteStopUncheckedCreateNestedManyWithoutRouteInput
+}
+
+export type RouteCreateOrConnectWithoutLocationsInput = {
+  where: Prisma.RouteWhereUniqueInput
+  create: Prisma.XOR<Prisma.RouteCreateWithoutLocationsInput, Prisma.RouteUncheckedCreateWithoutLocationsInput>
+}
+
+export type RouteUpsertWithoutLocationsInput = {
+  update: Prisma.XOR<Prisma.RouteUpdateWithoutLocationsInput, Prisma.RouteUncheckedUpdateWithoutLocationsInput>
+  create: Prisma.XOR<Prisma.RouteCreateWithoutLocationsInput, Prisma.RouteUncheckedCreateWithoutLocationsInput>
+  where?: Prisma.RouteWhereInput
+}
+
+export type RouteUpdateToOneWithWhereWithoutLocationsInput = {
+  where?: Prisma.RouteWhereInput
+  data: Prisma.XOR<Prisma.RouteUpdateWithoutLocationsInput, Prisma.RouteUncheckedUpdateWithoutLocationsInput>
+}
+
+export type RouteUpdateWithoutLocationsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  route_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  status?: Prisma.EnumRouteStatusFieldUpdateOperationsInput | $Enums.RouteStatus
+  total_distance_km?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  total_duration_min?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  driver?: Prisma.DriverUpdateOneWithoutRoutesNestedInput
+  vehicle?: Prisma.VehicleUpdateOneWithoutRoutesNestedInput
+  stops?: Prisma.RouteStopUpdateManyWithoutRouteNestedInput
+}
+
+export type RouteUncheckedUpdateWithoutLocationsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  route_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  driver_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vehicle_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumRouteStatusFieldUpdateOperationsInput | $Enums.RouteStatus
+  total_distance_km?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  total_duration_min?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  stops?: Prisma.RouteStopUncheckedUpdateManyWithoutRouteNestedInput
 }
 
 export type RouteCreateManyDriverInput = {
@@ -746,6 +846,7 @@ export type RouteUpdateWithoutDriverInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   vehicle?: Prisma.VehicleUpdateOneWithoutRoutesNestedInput
   stops?: Prisma.RouteStopUpdateManyWithoutRouteNestedInput
+  locations?: Prisma.DriverLocationUpdateManyWithoutRouteNestedInput
 }
 
 export type RouteUncheckedUpdateWithoutDriverInput = {
@@ -757,6 +858,7 @@ export type RouteUncheckedUpdateWithoutDriverInput = {
   total_duration_min?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   stops?: Prisma.RouteStopUncheckedUpdateManyWithoutRouteNestedInput
+  locations?: Prisma.DriverLocationUncheckedUpdateManyWithoutRouteNestedInput
 }
 
 export type RouteUncheckedUpdateManyWithoutDriverInput = {
@@ -788,6 +890,7 @@ export type RouteUpdateWithoutVehicleInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   driver?: Prisma.DriverUpdateOneWithoutRoutesNestedInput
   stops?: Prisma.RouteStopUpdateManyWithoutRouteNestedInput
+  locations?: Prisma.DriverLocationUpdateManyWithoutRouteNestedInput
 }
 
 export type RouteUncheckedUpdateWithoutVehicleInput = {
@@ -799,6 +902,7 @@ export type RouteUncheckedUpdateWithoutVehicleInput = {
   total_duration_min?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   stops?: Prisma.RouteStopUncheckedUpdateManyWithoutRouteNestedInput
+  locations?: Prisma.DriverLocationUncheckedUpdateManyWithoutRouteNestedInput
 }
 
 export type RouteUncheckedUpdateManyWithoutVehicleInput = {
@@ -818,10 +922,12 @@ export type RouteUncheckedUpdateManyWithoutVehicleInput = {
 
 export type RouteCountOutputType = {
   stops: number
+  locations: number
 }
 
 export type RouteCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   stops?: boolean | RouteCountOutputTypeCountStopsArgs
+  locations?: boolean | RouteCountOutputTypeCountLocationsArgs
 }
 
 /**
@@ -841,6 +947,13 @@ export type RouteCountOutputTypeCountStopsArgs<ExtArgs extends runtime.Types.Ext
   where?: Prisma.RouteStopWhereInput
 }
 
+/**
+ * RouteCountOutputType without action
+ */
+export type RouteCountOutputTypeCountLocationsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.DriverLocationWhereInput
+}
+
 
 export type RouteSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -854,6 +967,7 @@ export type RouteSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   driver?: boolean | Prisma.Route$driverArgs<ExtArgs>
   vehicle?: boolean | Prisma.Route$vehicleArgs<ExtArgs>
   stops?: boolean | Prisma.Route$stopsArgs<ExtArgs>
+  locations?: boolean | Prisma.Route$locationsArgs<ExtArgs>
   _count?: boolean | Prisma.RouteCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["route"]>
 
@@ -899,6 +1013,7 @@ export type RouteInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   driver?: boolean | Prisma.Route$driverArgs<ExtArgs>
   vehicle?: boolean | Prisma.Route$vehicleArgs<ExtArgs>
   stops?: boolean | Prisma.Route$stopsArgs<ExtArgs>
+  locations?: boolean | Prisma.Route$locationsArgs<ExtArgs>
   _count?: boolean | Prisma.RouteCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type RouteIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -916,6 +1031,7 @@ export type $RoutePayload<ExtArgs extends runtime.Types.Extensions.InternalArgs 
     driver: Prisma.$DriverPayload<ExtArgs> | null
     vehicle: Prisma.$VehiclePayload<ExtArgs> | null
     stops: Prisma.$RouteStopPayload<ExtArgs>[]
+    locations: Prisma.$DriverLocationPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1323,6 +1439,7 @@ export interface Prisma__RouteClient<T, Null = never, ExtArgs extends runtime.Ty
   driver<T extends Prisma.Route$driverArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Route$driverArgs<ExtArgs>>): Prisma.Prisma__DriverClient<runtime.Types.Result.GetResult<Prisma.$DriverPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   vehicle<T extends Prisma.Route$vehicleArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Route$vehicleArgs<ExtArgs>>): Prisma.Prisma__VehicleClient<runtime.Types.Result.GetResult<Prisma.$VehiclePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   stops<T extends Prisma.Route$stopsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Route$stopsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$RouteStopPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  locations<T extends Prisma.Route$locationsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Route$locationsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$DriverLocationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1820,6 +1937,30 @@ export type Route$stopsArgs<ExtArgs extends runtime.Types.Extensions.InternalArg
   take?: number
   skip?: number
   distinct?: Prisma.RouteStopScalarFieldEnum | Prisma.RouteStopScalarFieldEnum[]
+}
+
+/**
+ * Route.locations
+ */
+export type Route$locationsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the DriverLocation
+   */
+  select?: Prisma.DriverLocationSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the DriverLocation
+   */
+  omit?: Prisma.DriverLocationOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.DriverLocationInclude<ExtArgs> | null
+  where?: Prisma.DriverLocationWhereInput
+  orderBy?: Prisma.DriverLocationOrderByWithRelationInput | Prisma.DriverLocationOrderByWithRelationInput[]
+  cursor?: Prisma.DriverLocationWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.DriverLocationScalarFieldEnum | Prisma.DriverLocationScalarFieldEnum[]
 }
 
 /**

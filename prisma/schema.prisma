@@ -190,7 +190,7 @@ model Driver {
   status  DriverStatus @default(available)
   user    User         @relation(fields: [user_id], references: [id])
   routes  Route[]
-
+  locations DriverLocation[]
   @@map("drivers")
 }
 
@@ -224,7 +224,7 @@ model Route {
   driver             Driver?     @relation(fields: [driver_id], references: [id])
   vehicle            Vehicle?    @relation(fields: [vehicle_id], references: [id])
   stops              RouteStop[]
-
+  locations          DriverLocation[]
   @@map("routes")
 }
 
@@ -267,4 +267,20 @@ model Forecast {
 
   @@map("forecasts")
 }
+
+// ─── DRIVER LOCATION (lịch sử vị trí tài xế) ────────
+model DriverLocation {
+  id         String   @id @default(uuid())
+  driver_id  String
+  route_id   String?
+  latitude   Decimal  @db.Decimal(10, 7)
+  longitude  Decimal  @db.Decimal(10, 7)
+  recorded_at DateTime @default(now())
+
+  driver Driver @relation(fields: [driver_id], references: [id])
+  route  Route?  @relation(fields: [route_id], references: [id])
+
+  @@map("driver_locations")
+}
+
 
