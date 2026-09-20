@@ -10,7 +10,7 @@ export class ForecastController {
 
   @Roles(Role.ADMIN, Role.WAREHOUSE_MANAGER)
   @Post('backfill-actual')
-  backfillActuals(dto: RunForecastDto) {
+  backfillActuals(@Body() dto: RunForecastDto) {
     return this.forecastService.backfillActuals(dto.product_id, dto.warehouse_id)
   }
 

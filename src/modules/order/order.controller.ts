@@ -6,8 +6,7 @@ import { Roles } from '#/common/decorators/roles.decorator.js';
 import { Role } from '#/common/enums/role.enum.js';
 import { OrderStatus } from '#/generated/prisma/enums.js';
 import { CurrentUser } from '#/common/decorators/current-user.decorator.js';
-import * as client from '#/generated/prisma/client.js';
-import { AuthGuard } from '@nestjs/passport';
+import { UpdateOrderStatusDto } from './dto/update-order-status.dto.js';
 
 
 @Controller('order')
@@ -22,7 +21,7 @@ export class OrderController {
 
   @Roles(Role.ADMIN, Role.DISPATCHER)
   @Patch(':id/status')
-  async updateStatus(@Param('id') id: string, @Body() dto: { status: OrderStatus }) {
+  async updateStatus(@Param('id') id: string, @Body() dto: UpdateOrderStatusDto) {
     return this.orderService.updateStatus(id, dto);
   }
 

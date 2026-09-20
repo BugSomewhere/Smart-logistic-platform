@@ -20,31 +20,18 @@ export class VehicleService {
   }
 
   async findOne(id: string) {
-    return this.prisma.route.findUnique({
-      where: { id },
-      include: {
-        driver: true,
-        vehicle: true,
-        stops: {
-          include: { delivery_point: true },
-          orderBy: { sequence: 'asc' },
-        },
-      },
+    return this.prisma.vehicle.findUnique({
+      where: {
+        id: id,
+      }
     });
   }
 
   async findAll() {
-    return this.prisma.route.findMany({
+    return this.prisma.vehicle.findMany({
       include: {
-        driver: true,
-        vehicle: true,
-        stops: {
-          include: { delivery_point: true },
-          orderBy: { sequence: 'asc' },
-        },
-      },
+        routes: true
+      }
     });
   }
-
-  
 }

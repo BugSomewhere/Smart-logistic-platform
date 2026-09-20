@@ -18,6 +18,7 @@ import { VehicleModule } from './modules/vehicle/vehicle.module.js';
 import { DriverModule } from './modules/driver/driver.module.js';
 import { ForecastModule } from './modules/forecast/forecast.module.js';
 import { TrackingModule } from './modules/tracking/tracking.module.js';
+import { DashboardModule } from './modules/dashboard/dashboard.module.js';
 
 export const { ObserveModule, ObserveInstrument } = createObserveModule();
 
@@ -48,11 +49,14 @@ export const { ObserveModule, ObserveInstrument } = createObserveModule();
     OrderModule,
     RouteModule,
     ForecastModule,
-    TrackingModule
+    TrackingModule,
+    DashboardModule
   ],
   controllers: [AppController],
-  providers: [AppService]
-    // { provide: APP_GUARD, useClass: AccessTokenGuard },
-    // { provide: APP_GUARD, useClass: RolesGuard },
+  providers: [
+    AppService,
+    { provide: APP_GUARD, useClass: AccessTokenGuard },
+    { provide: APP_GUARD, useClass: RolesGuard },
+  ],
 })
 export class AppModule { }

@@ -12,13 +12,14 @@ type JwtPayload = {
 @Injectable()
 export class AccessTokenStrategy extends PassportStrategy(Strategy, 'jwt') {
    constructor(config: ConfigService) {
-     super({
-      jwtFromRequest: ExtractJwt.fromHeader('authorization'),
-      secretOrKey: config.getOrThrow<string>("JWT_ACCESS_SECRET"),
-     })
+      super({
+         //jwtFromRequest: ExtractJwt.fromHeader('authorization'),
+         jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
+         secretOrKey: config.getOrThrow<string>("JWT_ACCESS_SECRET"),
+      })
    }
-   
-   validate(payload: JwtPayload){
-      return {userId : payload.sub, email: payload.email, role: payload.role}
+
+   validate(payload: JwtPayload) {
+      return { userId: payload.sub, email: payload.email, role: payload.role }
    }
 }

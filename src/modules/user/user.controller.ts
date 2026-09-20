@@ -13,7 +13,6 @@ export class UserController {
   constructor(private readonly userService: UserService) { }
 
   @UseGuards(AccessTokenGuard, RolesGuard)
-  @Roles(Role.ADMIN, Role.DRIVER)
   @Get("me")
   getProfile(@CurrentUser('userId') userId: string) {
     return this.userService.getProfile(userId);
