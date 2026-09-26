@@ -4,7 +4,7 @@ import { OptimizeRouteDto } from './dto/optimize-route.dto.js';
 import { AssignRouteDto } from './dto/assign-route.dto.js';
 import { Role } from "#/common/enums/role.enum.js"
 import { Roles } from '#/common/decorators/roles.decorator.js';
-import { ReorderStopsDto } from '../vehicle/dto/reorder-stops.dto.js';
+import { ReorderStopsDto } from './dto/reorder-stops.dto.js';
 
 
 @Controller('route')
@@ -30,7 +30,7 @@ export class RouteController {
   }
 
 
-  @Roles(Role.ADMIN, Role.DISPATCHER)
+  @Roles(Role.ADMIN, Role.DISPATCHER, Role.DRIVER)
   @Get()
   findAll() {
     return this.routeService.findAll();

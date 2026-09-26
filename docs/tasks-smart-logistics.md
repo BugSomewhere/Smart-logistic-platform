@@ -30,12 +30,12 @@ Dựa trên `Smart_Logistics_Platform_SRS.md`, bám theo 5 giai đoạn ở Mụ
 
 - [ ] 16. TrackingModule: WebSocket namespace `/tracking`, tài xế emit vị trí định kỳ (FR-TRK-01)
 - [ ] 17. Dashboard: hiển thị vị trí tài xế real-time trên bản đồ (FR-TRK-02, FR-DASH-02)
-- [ ] 18. Giao diện tài xế (web responsive theo MVP): xem tuyến hiện tại, cập nhật trạng thái điểm giao (FR-TRK-03, FR-TRK-04)
-- [ ] 19. Dashboard tổng hợp: KPI tổng quan, biểu đồ dự báo theo sản phẩm, danh sách cảnh báo hệ thống (FR-DASH-01, FR-DASH-03, FR-DASH-04)
+- [x] 18. Giao diện tài xế (web responsive theo MVP): xem tuyến hiện tại, cập nhật trạng thái điểm giao (FR-TRK-03, FR-TRK-04)
+- [x] 19. Dashboard tổng hợp: KPI tổng quan, biểu đồ dự báo theo sản phẩm, danh sách cảnh báo hệ thống (FR-DASH-01, FR-DASH-03, FR-DASH-04)
 
 ## Giai đoạn 5 (Tuần 13+) — Hoàn thiện
 
-- [ ] 20. Kiểm thử toàn hệ thống, xử lý fallback khi FastAPI service lỗi/timeout, viết báo cáo đồ án, chuẩn bị bảo vệ
+- [x] 20. Kiểm thử toàn hệ thống, xử lý fallback khi FastAPI service lỗi/timeout, viết báo cáo đồ án, chuẩn bị bảo vệ
 
 ---
 

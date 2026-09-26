@@ -2,14 +2,18 @@ import { NestFactory } from '@nestjs/core';
 import { AppModule, ObserveInstrument } from '#/app.module.js';
 import { Logger, ValidationPipe } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
+import { NestExpressApplication } from '@nestjs/platform-express';
+import { join } from 'path';
 
 async function bootstrap() {
 
   const logger = new Logger("Bootstrap");
 
-  const app = await NestFactory.create(AppModule, {
+  const app = await NestFactory.create<NestExpressApplication>(AppModule, {
     instrument: ObserveInstrument,
   });
+
+  app.useStaticAssets(join(process.cwd(), 'public'));
   app.setGlobalPrefix('api/v1');
 
   app.useGlobalPipes(new ValidationPipe({

@@ -107,6 +107,35 @@ export class OrderService {
     if (dto.status === OrderStatus.confirmed) {
       return this.confirmOrder(order);
     }
+    // Hoàn kho khi cancel đơn đã confirmed
+    if (dto.status === OrderStatus.cancelled && order.status === OrderStatus.confirmed) {
+      return this.prisma.$transaction(async (tx) => {
+        for (const item of order.items) {
+          await tx.stockMovement.create({
+            data: {
+              product_id: item.product_id,
+              warehouse_id: order.warehouse_id,
+              type: 'in',
+              quantity: item.quantity,
+              reference_order_id: order.id,
+            },
+          });
+          await tx.inventory.update({
+            where: {
+              product_id_warehouse_id: {
+                product_id: item.product_id,
+                warehouse_id: order.warehouse_id,
+              },
+            },
+            data: { quantity: { increment: item.quantity } },
+          });
+        }
+        return tx.order.update({
+          where: { id },
+          data: { status: OrderStatus.cancelled },
+        });
+      });
+    }
     return this.prisma.order.update({
       where: { id },
       data: { status: dto.status },

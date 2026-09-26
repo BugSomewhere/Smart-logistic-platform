@@ -1,11 +1,12 @@
 import { Type } from "class-transformer";
-import { IsArray, IsDateString, IsInt, IsNotEmpty, IsNumber, IsOptional, IsString, IsUUID, ValidateNested } from "class-validator";
+import { ArrayMinSize, IsArray, IsDateString, IsInt, IsNotEmpty, IsNumber, IsOptional, IsString, IsUUID, Min, ValidateNested } from "class-validator";
 
 class CreateOrderItemDto {
    @IsUUID()
    product_id: string
 
    @IsInt()
+   @Min(1)
    quantity: number
 }
 
@@ -32,11 +33,13 @@ export class CreateOrderDto {
   warehouse_id: string;
 
   @IsArray()
+  @ArrayMinSize(1)
   @ValidateNested({ each: true })
   @Type(() => CreateOrderItemDto)
   items: CreateOrderItemDto[];
 
   @IsArray()
+  @ArrayMinSize(1)
   @ValidateNested({ each: true })
   @Type(() => CreateDeliveryPointDto)
   delivery_points: CreateDeliveryPointDto[];

@@ -33,6 +33,7 @@ export class ProductService {
   async findAll(query: QueryProductDto) {
     return this.prisma.product.findMany({
       where: {
+        deletedAt: null,
         ...(query.search && {
           OR: [
             { name: { contains: query.search, mode: 'insensitive' }},
@@ -46,8 +47,8 @@ export class ProductService {
   }
 
   async findOne(id: string){
-    return this.prisma.product.findUnique({
-      where: { id }
+    return this.prisma.product.findFirst({
+      where: { id, deletedAt: null }
     })
   }
 

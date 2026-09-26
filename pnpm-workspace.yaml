@@ -1,8 +1,13 @@
 allowBuilds:
-  '@prisma/engines': set this to true or false
-  '@swc/core': set this to true or false
+  '@prisma/engines': true
+  '@swc/core': true
   bcrypt: true
   esbuild: true
   msgpackr-extract: true
   prisma: true
+  unrs-resolver: true
   workerd: true
+packages:
+  - 'apps/*'
+  - 'services/*'
+  - 'packages/*'

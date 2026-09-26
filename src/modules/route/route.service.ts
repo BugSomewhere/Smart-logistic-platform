@@ -4,7 +4,7 @@ import { OptimizeRouteDto } from './dto/optimize-route.dto.js';
 import { AssignRouteDto } from './dto/assign-route.dto.js';
 import { TspPoint, TspSolverService } from './tsp-solver.service.js';
 import { DriverStatus, OrderStatus, RouteStatus } from '#/generated/prisma/enums.js';
-import { ReorderStopsDto } from '../vehicle/dto/reorder-stops.dto.js';
+import { ReorderStopsDto } from './dto/reorder-stops.dto.js';
 
 @Injectable()
 export class RouteService {

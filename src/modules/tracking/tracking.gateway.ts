@@ -57,6 +57,12 @@ export class TrackingGateway
       },
     });
 
+    // Cập nhật trạng thái driver sang on_route
+    await this.prisma.driver.updateMany({
+      where: { id: data.driver_id, status: 'available' },
+      data: { status: 'on_route' },
+    });
+
     // 2. Cập nhật in-memory
     this.driverPositions.set(data.driver_id, {
       latitude: data.latitude,

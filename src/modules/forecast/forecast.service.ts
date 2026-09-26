@@ -1,11 +1,12 @@
-import { Injectable, InternalServerErrorException } from '@nestjs/common';
+import { BadRequestException, Injectable, InternalServerErrorException, Logger } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service.js';
 import { ConfigService } from '@nestjs/config';
 import { RunForecastDto } from './dto/run-forecast.dto.js';
-import { count } from 'node:console';
 
 @Injectable()
 export class ForecastService {
+  private readonly logger = new Logger(ForecastService.name);
+
   constructor(
     private readonly prisma: PrismaService,
     private readonly config: ConfigService
@@ -33,28 +34,59 @@ export class ForecastService {
       .map(([date, quantity]) => ({ date, quantity }))
 
     if (history.length === 0) {
-      throw new Error("No historical data for this product");
+      throw new BadRequestException("No historical data for this product");
     }
 
-    // 3. Gọi FastAPI /predict
+    // 3. Gọi FastAPI /predict (với fallback sang Moving Average khi ML service lỗi)
     const mlUrl = this.config.get("ML_SERVICE_URL")
-    const response = await fetch(`${mlUrl}/api/predict`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        product_id: dto.product_id,
-        warehouse_id: dto.warehouse_id ?? null,
-        history,
-        periods: dto.periods ?? 30,
-        model_type: dto.model_type ?? "prophet",
-      }),
-    })
+    let result: {
+      model_used: string;
+      predictions: Array<{ date: string; predicted_quantity: number; low_bound: number | null; upper_bound: number | null }>;
+    };
 
-    if (!response.ok) {
-      throw new InternalServerErrorException('ML service prediction failed');
+    try {
+      const response = await fetch(`${mlUrl}/api/predict`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          product_id: dto.product_id,
+          warehouse_id: dto.warehouse_id ?? null,
+          history,
+          periods: dto.periods ?? 30,
+          model_type: dto.model_type ?? "prophet",
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error(`ML service returned status ${response.status}`);
+      }
+
+      result = await response.json();
+    } catch (err: any) {
+      this.logger.warn(`ML Service error: ${err.message}. Falling back to Simple Moving Average.`);
+
+      const periods = dto.periods ?? 30;
+      const totalQty = history.reduce((sum, h) => sum + h.quantity, 0);
+      const avgQty = Math.max(1, Math.round(totalQty / (history.length || 1)));
+
+      const predictions: Array<{ date: string; predicted_quantity: number; low_bound: number | null; upper_bound: number | null }> = [];
+      const startDate = new Date();
+      for (let i = 1; i <= periods; i++) {
+        const nextDate = new Date(startDate);
+        nextDate.setDate(startDate.getDate() + i);
+        predictions.push({
+          date: nextDate.toISOString().split('T')[0],
+          predicted_quantity: avgQty,
+          low_bound: null,
+          upper_bound: null,
+        });
+      }
+
+      result = {
+        model_used: 'moving_avg_fallback',
+        predictions,
+      };
     }
-
-    const result = await response.json();
 
     if (!result.predictions || result.predictions.length === 0) {
       return {
@@ -108,6 +140,7 @@ export class ForecastService {
         actual_quantity: null,
         forecast_date: { lt: new Date() }
       },
+      orderBy: { forecast_date: 'asc' },
     });
 
     if (pendingForecasts.length === 0) return { updated: 0 }
